@@ -57,7 +57,7 @@ public class loginNVview extends JFrame {
 	public loginNVview() {
 		setTitle("2uan Cinema");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
 		setResizable(false);
 		setSize(1000, 675);
 		setLocationRelativeTo(null);
@@ -193,10 +193,10 @@ public class loginNVview extends JFrame {
 		contentPane.add(cinemaLabel);
 		
 		background = new JLabel();
-		background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\back.png"));
+		background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\back.png"));
 		background.setBounds(0, 0, 1000, 675);
 		contentPane.add(background);
-		
+		//C:\Users\tlmqu\git\repository\
 	}
 	int sonv = 1;
 	public void duyet_csdl_nv() {
