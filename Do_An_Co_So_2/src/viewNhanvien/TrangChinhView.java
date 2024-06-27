@@ -66,12 +66,6 @@ public class TrangChinhView extends JFrame{
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-//		newTicketLabel = new JLabel("New Ticket");
-//		newTicketLabel.setFont(new Font("STLiti", Font.BOLD, 40));
-//		newTicketLabel.setBounds(310, 320, 200, 100);
-//		newTicketLabel.setForeground(new Color(59, 31, 1));
-//		contentPane.add(newTicketLabel);
-		
 		khung2nut = new JPanel();
 		khung2nut.setBounds(200, 150, 400, 200);
 		khung2nut.setLayout(null);
@@ -118,28 +112,8 @@ public class TrangChinhView extends JFrame{
 		menuDoAn menudoan = new menuDoAn();
 		menuNuocUong menunuoc = new menuNuocUong();
 		
-		
-//		tam lg = new tam();
-//		
-//		JButton logOut = new JButton("←");
-//		logOut.setFont(new Font("Arial", Font.BOLD, 40));
-//		logOut.setBackground(new Color(238, 232, 221));
-//		logOut.setBorderPainted(false);
-//		logOut.setBounds(20, 460, 80, 30);
-//		logOut.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if (num == 1) {
-//					setVisible(false);
-//					lg.setVisible(true);
-//				}
-//			}
-//		});
-//		contentPane.add(logOut);
-		
 		veThucAn = new JButton("FOOD");
-		veThucAn.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\popcorn.png"));
+		veThucAn.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\popcorn.png"));
 		veThucAn.setFont(new Font("Showcard Gothic", Font.BOLD, 22));
 		veThucAn.setBounds(200, 0, 200, 200);
 		veThucAn.setBackground(new Color(174, 189, 147));
@@ -155,7 +129,7 @@ public class TrangChinhView extends JFrame{
 		});
 		
 		vePhim = new JButton("Movie Ticket");
-		vePhim.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\mayChieu.png"));
+		vePhim.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\mayChieu.png"));
 		vePhim.setText("Movie");
 		vePhim.setFont(new Font("Showcard Gothic", Font.BOLD, 22));
 		vePhim.setBounds(0, 0, 200, 200);
@@ -184,7 +158,7 @@ public class TrangChinhView extends JFrame{
 		contentPane.add(cinemaLabel);
 		
 		JLabel logo = new JLabel("");
-		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\cinema.png"));
+		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\cinema.png"));
 		logo.setBounds(600, 340, 256, 256);
 		contentPane.add(logo);
 		
@@ -200,7 +174,7 @@ public class TrangChinhView extends JFrame{
 		
 		
 		JLabel Background = new JLabel("");
-		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\ChairBackground.png"));
+		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
 		Background.setBounds(0, 0, 1035, 703);
 		contentPane.add(Background);
 		

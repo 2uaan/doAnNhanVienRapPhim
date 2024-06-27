@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import dao.xuatChieuDAO;
 import database.jdbc_new;
 import viewXacNhan.wait;
 
@@ -37,6 +38,7 @@ public class chonXuatChieuView extends JFrame {
 	private JCheckBox check_mov2;
 	private JCheckBox check_mov1;
 	private JCheckBox check_mov3;
+	private String[] tenP, gioC;
 	
 	
 
@@ -72,12 +74,15 @@ public class chonXuatChieuView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		tenP = new xuatChieuDAO().duyetTenPhim();
+		gioC = new xuatChieuDAO().duyetGioChieu();
+		
 		
 		khungXuatChieu = new JPanel();
 //		khungXuatChieu.setBorder(UIManager.getBorder("OptionPane.buttonAreaBorder"));
 		khungXuatChieu.setBackground(new Color(201, 192, 151));
 //		khungXuatChieu.setBackground(Color.black);
-		khungXuatChieu.setBounds( 100, 70,700, 400);
+		khungXuatChieu.setBounds( 100, 70, 700, 400);
 		
 		Insets in = new Insets(0, 10, 0, 0);
 		
@@ -89,7 +94,7 @@ public class chonXuatChieuView extends JFrame {
 		gbl_khungXuatChieu.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		khungXuatChieu.setLayout(gbl_khungXuatChieu);
 		
-		nameMov1 = new JLabel("Kẻ Ăn Hồn");
+		nameMov1 = new JLabel(tenP[0]);
 		
 		nameMov1.setFont(font);
 		
@@ -109,11 +114,11 @@ public class chonXuatChieuView extends JFrame {
 		khungXuatChieu.add(mov1, gbc_mov1);
 		mov1.setLayout(new GridLayout(0,1));
 		
-		check_mov1 = new JCheckBox("22:40 - 01:00");
+		check_mov1 = new JCheckBox(gioC[0]);
 		check_mov1.setMargin(new Insets(0, 10, 0, 0));
 		mov1.add(check_mov1);
 		
-		nameMov2 = new JLabel("Người Vợ Cuối Cùng");
+		nameMov2 = new JLabel(tenP[1]);
 		nameMov2.setFont(font);
 		GridBagConstraints gbc_nameMov2 = new GridBagConstraints();
 		gbc_nameMov2.fill = GridBagConstraints.BOTH;
@@ -132,13 +137,13 @@ public class chonXuatChieuView extends JFrame {
 		khungXuatChieu.add(mov2, gbc_mov2);
 		mov2.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		check_mov2 = new JCheckBox("11:30 - 13:40");
+		check_mov2 = new JCheckBox(gioC[1]);
 		check_mov2.setMargin(new Insets(0, 10, 0, 0));
 		mov2.add(check_mov2);
 		
 		
 		
-		nameMov3 = new JLabel("WolFoo Và Hòn Đảo Kì Bí");
+		nameMov3 = new JLabel(tenP[2]);
 		nameMov3.setFont(font);
 		GridBagConstraints gbc_nameMov3 = new GridBagConstraints();
 		gbc_nameMov3.fill = GridBagConstraints.BOTH;
@@ -159,7 +164,7 @@ public class chonXuatChieuView extends JFrame {
 		khungXuatChieu.add(mov3, gbc_mov3);
 		mov3.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		check_mov3 = new JCheckBox("20:00 - 22:34");
+		check_mov3 = new JCheckBox(gioC[2]);
 		check_mov3.setMargin(new Insets(0, 10, 0, 0));
 		mov3.add(check_mov3);
 		
@@ -183,7 +188,7 @@ public class chonXuatChieuView extends JFrame {
 		contentPane.add(next);
 		
 		khungNgoai = new JPanel();
-	    khungNgoai.setBounds( 135, 65, 630, 410);
+	    khungNgoai.setBounds( 90, 65, 720, 410);
 	    khungNgoai.setBackground(Color.black);
 	    khungNgoai.add(khungXuatChieu);
 	    contentPane.add(khungNgoai);
@@ -210,31 +215,17 @@ public class chonXuatChieuView extends JFrame {
 	public void luu_xuat_chieu() {
 		int phim=0;
 		if (check_mov1.isSelected()) {
-			phim=1;
+			phim=312;
 		}
 		if (check_mov2.isSelected()) {
-			phim=2;
+			phim=465;
 		}
 		if (check_mov3.isSelected()) {
-			phim=3; 
+			phim=798; 
 		}
-		Connection c = null;
 		
-		try {
-			c = jdbc_new.getConnection();
-			
-			Statement st = c.createStatement();
-			
-			String sql = "INSERT INTO xuatchieuhientai(tenPhim, nhanvien, tongGheNS, tongGheV, tongGheC)"
-					+ "VALUES ("+phim+",0,0,0,0)";
-			
-			int check = st.executeUpdate(sql);
-			
-			jdbc_new.closeConnection(c);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+		new xuatChieuDAO().luuXuatChieuDangChon(phim);
+		
 	}
 
 }

@@ -52,12 +52,12 @@ public class testt {
 //		try {
 //			Connection c = jdbc_new.getConnection();
 //			Statement st = c.createStatement();
-//			String sql = "INSERT INTO ghecouple(hang, cot, tenGhe, xuatChieu, trangThai)\nVALUES";
+//			String sql = "INSERT INTO ghevip(hang, cot, tenGhe, xuatChieu, trangThai)\nVALUES";
 //			
 //			for (int i =0; i<2; i++) {
-//				char ch = (i==0) ? 'E':'F';
-//				for (int j=0; j<4; j++) {
-//					if (j == 3 && i==1) sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 0 + ");";
+//				char ch = (i==0) ? 'C':'D';
+//				for (int j=0; j<8; j++) {
+//					if (j == 7 && i==1) sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 0 + ");";
 //					else sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 0 + "),";
 //					
 //				}
@@ -74,15 +74,19 @@ public class testt {
 //			e.printStackTrace();
 //		}
 		
+		
+		
+		
+		
 		try {
 			Connection c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO xuatchieuhientai(maXC, tenPhim, nhanvien, tongGheNS, tongGheV, tongGheC)\nVALUES"
-					+ "\n(312, 'Inside Out 2', null, 16, 16, 8),"
-					+ "\n(465, 'Kẻ Ăn Hồn', null, 16, 16, 8),"
-					+ "\n(798, 'Người Vợ Cuối Cùng', null, 16, 16, 8);";
+			String sql = "INSERT INTO xuatchieuhientai(maXC, tenPhim, nhanvien, tongGheNS, tongGheV, tongGheC, gioBatDau, gioKetThuc)\nVALUES"
+					+ "\n(312, 'Inside Out 2', null, 16, 16, 8, '16:30', '18:10'),"
+					+ "\n(465, 'Deadpool & Wolverine', null, 16, 16, 8, '18:30', '21:00'),"
+					+ "\n(798, 'Godzilla x Kong: The New Empire', null, 16, 16, 8, '21:20', '23:30');";
 			
-			
+			System.out.println(sql);
 			
 			int kq = st.executeUpdate(sql);
 			

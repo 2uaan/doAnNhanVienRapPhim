@@ -23,6 +23,7 @@ public class nhanVienDAO implements DAOinterface<nhanVien>{
 				String tam = result.getString("hoVaTen");
 				sonv++;
 			}
+			jdbc_new.closeConnection(c);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
