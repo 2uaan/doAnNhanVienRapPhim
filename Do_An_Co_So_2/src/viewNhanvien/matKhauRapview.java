@@ -52,7 +52,7 @@ public class matKhauRapview extends JFrame {
 	public matKhauRapview() {
 		setTitle("2uan Cinema");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
 		setResizable(false);
 		setSize(450, 270);
 		setLocationRelativeTo(null);
@@ -69,9 +69,11 @@ public class matKhauRapview extends JFrame {
 		try {
 			c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT nhanvien FROM xuatchieuhientai"
-					+ "\nWHERE maXC = 312");
-			tennv = result.getCursorName();
+			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
+
+			while (result.next()) {
+				tennv = result.getString("nhanvien");
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -100,7 +102,7 @@ public class matKhauRapview extends JFrame {
 		rapPF.setBounds(150, 110, 235, 27);
 		contentPane.add(rapPF);
 		
-//		TrangChinhView tcv = new TrangChinhView();
+		TrangChinhView tcv = new TrangChinhView();
 		
 		next = new JButton("→");
 		next.addActionListener(new ActionListener() {
@@ -110,7 +112,7 @@ public class matKhauRapview extends JFrame {
 				
 				if (ktrPassRap.equals(new inforRapPhim().matkhauRap)) {
 					setVisible(false);
-//					tcv.setVisible(true);
+					tcv.setVisible(true);
 				}else if (ktrPassRap.equals("")){
 					JOptionPane.showMessageDialog(null, "Mật Khẩu Rạp Chưa Được Nhập!!!", "ERORR!!!", JOptionPane.ERROR_MESSAGE);
 				}else {
@@ -127,7 +129,7 @@ public class matKhauRapview extends JFrame {
 		contentPane.add(next);
 		
 		background = new JLabel();
-		background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\xacnhanNVview.png"));
+		background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\xacnhanNVview.png"));
 		background.setBounds(0, -15, 450, 300);
 		contentPane.add(background);
 	}

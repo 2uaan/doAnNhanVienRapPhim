@@ -71,23 +71,6 @@ public class chonXuatChieuView extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		Connection c = null;
-		
-		try {
-			c = jdbc_new.getConnection();
-			
-			Statement st = c.createStatement();
-			
-			String sql = "DELETE FROM xuatchieuhientai";
-			
-			int check = st.executeUpdate(sql);
-			
-			jdbc_new.closeConnection(c);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
 		
 		
 		khungXuatChieu = new JPanel();
