@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import database.jdbc_new;
+import model.inforRapPhim;
 
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -29,7 +30,6 @@ public class matKhauRapview extends JFrame {
 	private JLabel background, chaoLabel, passRapLabel, tennvLabel;
 	private JPasswordField rapPF;
 	private JButton next;
-	private String passRap = "nvdanang43";
 	/**
 	 * Launch the application.
 	 */
@@ -69,11 +69,9 @@ public class matKhauRapview extends JFrame {
 		try {
 			c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
-			
-			while (result.next()) {
-				tennv = result.getString("nhanvien");
-			}
+			ResultSet result = st.executeQuery("SELECT nhanvien FROM xuatchieuhientai"
+					+ "\nWHERE maXC = 312");
+			tennv = result.getCursorName();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -102,7 +100,7 @@ public class matKhauRapview extends JFrame {
 		rapPF.setBounds(150, 110, 235, 27);
 		contentPane.add(rapPF);
 		
-		TrangChinhView tcv = new TrangChinhView();
+//		TrangChinhView tcv = new TrangChinhView();
 		
 		next = new JButton("→");
 		next.addActionListener(new ActionListener() {
@@ -110,9 +108,9 @@ public class matKhauRapview extends JFrame {
 				char[] tam = rapPF.getPassword();
 				String ktrPassRap = new String(tam);
 				
-				if (ktrPassRap.equals(passRap)) {
+				if (ktrPassRap.equals(new inforRapPhim().matkhauRap)) {
 					setVisible(false);
-					tcv.setVisible(true);
+//					tcv.setVisible(true);
 				}else if (ktrPassRap.equals("")){
 					JOptionPane.showMessageDialog(null, "Mật Khẩu Rạp Chưa Được Nhập!!!", "ERORR!!!", JOptionPane.ERROR_MESSAGE);
 				}else {

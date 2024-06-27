@@ -24,8 +24,12 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import dao.gheCDAO;
+import dao.gheNSDAO;
+import dao.xuatChieuDAO;
 import database.jdbc_new;
-import model.NhanVienModel;
+import model.inforRapPhim;
+import model.nhanVien;
 import viewXacNhan.xacnhanNV;
 
 public class loginNVview extends JFrame {
@@ -33,8 +37,8 @@ public class loginNVview extends JFrame {
 	private JPanel contentPane;
 	private JLabel background, _2uanLabel, cinemaLabel, manvLabel, marapLabel;
 	private JTextField manvTextField, marapTextField;
-	private String maRap = "danang43";
-	private String nv[], tenNV[];
+	private nhanVien nVien[] = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -55,6 +59,7 @@ public class loginNVview extends JFrame {
 	 * Create the frame.
 	 */
 	public loginNVview() {
+		duyet_csdl_nv();
 		setTitle("2uan Cinema");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
@@ -71,38 +76,7 @@ public class loginNVview extends JFrame {
 		JButton loginButton = new JButton("→");
 		
 		
-		xacnhanNV tc = new xacnhanNV();
-		
-		Connection c = null;
-		
-		try {
-			c = jdbc_new.getConnection();
-			
-			Statement st = c.createStatement();
-			
-			String sql = "DELETE FROM xuatchieuhientai";
-			
-			int check = st.executeUpdate(sql);
-			
-			sql = "DELETE FROM ghens";
-			int chec = st.executeUpdate(sql);
-			sql = "DELETE FROM ghevip";
-			int che = st.executeUpdate(sql);
-			sql = "DELETE FROM ghecouple";
-			int ch = st.executeUpdate(sql);
-			sql = "DELETE FROM doan_dagoi";
-			int dadg = st.executeUpdate(sql);
-			
-			jdbc_new.closeConnection(c);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		duyet_csdl_nv();
+		xacnhanNV tc = new xacnhanNV();	
 		
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,25 +86,14 @@ public class loginNVview extends JFrame {
 				
 				Connection c = null;
 				
-				for (int i=0; i<nv.length; i++) {
-					if (ktrMaNv.equals(nv[i])) {
+				for (int i=0; i<nVien.length; i++) {
+					if (ktrMaNv.equals(nVien[i].getMaNV() + "")) {
 						mnv = 1;
-						
-						try {
-							c = jdbc_new.getConnection();
-							Statement st = c.createStatement();
-							String sql = "INSERT INTO xuatchieuhientai(tenPhim, nhanvien, tongGheNS, tongGheV,  tongGheC)"
-									+ "VALUES (0,'"+tenNV[i]+"',0,0,0)";
-							int check = st.executeUpdate(sql);
-							jdbc_new.closeConnection(c);
-							
-						} catch (SQLException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+						xuatChieuDAO xc = new xuatChieuDAO();
+						xc.updateNV(nVien[i]);
 					}
 				}
-				if (ktrMaRap.equals(maRap))
+				if (ktrMaRap.equals(new inforRapPhim().marap))
 					mr = 1;
 				
 				if (mnv == 1 && mr == 1) {
@@ -196,9 +159,8 @@ public class loginNVview extends JFrame {
 		background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\back.png"));
 		background.setBounds(0, 0, 1000, 675);
 		contentPane.add(background);
-		//C:\Users\tlmqu\git\repository\
 	}
-	int sonv = 1;
+	int sonv = 0;
 	public void duyet_csdl_nv() {
 		Connection c = null;
 		
@@ -212,14 +174,16 @@ public class loginNVview extends JFrame {
 				sonv++;
 			}
 			ResultSet resul = st.executeQuery("SELECT * FROM nhanvien");
-			nv = new String[sonv];
-			tenNV = new String[sonv];
+			nVien = new nhanVien[sonv];
+			int i = 0;
 			while (resul.next()) {
+				nVien[i] = new nhanVien();
 				sonv--;
-				String manv = resul.getString("maNV");
+				int manv = resul.getInt("maNV");
 				String tennv = resul.getString("hoVaTen");
-				nv[sonv] = manv;
-				tenNV[sonv]= tennv;
+				nVien[i].setHoVaTen(tennv);
+				nVien[i].setMaNV(manv);
+				i++;
 			}
 			
 			jdbc_new.closeConnection(c);

@@ -19,7 +19,6 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import database.jdbc_new;
-import model.xuatChieuModel;
 import viewXacNhan.wait;
 
 import javax.swing.JTabbedPane;
@@ -34,7 +33,6 @@ import javax.swing.JCheckBox;
 public class chonXuatChieuView extends JFrame {
 
 	private JPanel contentPane, khungXuatChieu, mov1, mov2, mov3, khungNgoai;
-	public xuatChieuModel xc[] ;
 	private JLabel nameMov1, nameMov2, nameMov3;
 	private JCheckBox check_mov2;
 	private JCheckBox check_mov1;

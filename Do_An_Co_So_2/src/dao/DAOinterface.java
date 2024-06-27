@@ -6,9 +6,9 @@ public interface DAOinterface<T> {
 	
 	public int insert(T t);
 	
-	public int update(T t);
+	public int updateAll(T t);
 	
-	public int delete(T t);
+	public int deleteAll();
 	
 	public ArrayList<T> selectAll();
 	

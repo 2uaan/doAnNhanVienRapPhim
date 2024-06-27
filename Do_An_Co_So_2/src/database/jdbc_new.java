@@ -14,16 +14,16 @@ public class jdbc_new {
 		
 		
 		try {
-			// Đăng kí MySQL Driver với DriverManager
+			
 			
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 			
-			// Thong so
+
 			String url = "jdbc:mySQL://localhost:3306/danhsachnv";
 			String username = "root";
 			String password = "";
 			
-			// Tao ket noi
+
 			c = DriverManager.getConnection(url, username, password);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
