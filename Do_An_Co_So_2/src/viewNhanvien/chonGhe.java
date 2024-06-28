@@ -73,7 +73,7 @@ public class chonGhe extends JFrame {
 	public chonGhe() {
 		setTitle("2uan Cinema");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
 		setBounds(100, 100, 800, 450);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -191,7 +191,7 @@ public class chonGhe extends JFrame {
 		JLabel screen = new JLabel("SCREEN");
 		screen.setBounds(52, 10, 108, 29);
 		screen.setForeground(Color.WHITE);
-		screen.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 25));
+		screen.setFont(new Font("Tahoma", Font.BOLD, 23));
 		Screen.add(screen);
 		
 		tao_ghe_gan_man_hinh();
@@ -337,13 +337,13 @@ public class chonGhe extends JFrame {
 		panel_Khung.add(nutDone);
 		
 		JLabel logoIcon = new JLabel("");
-		logoIcon.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\cinema.png"));
+		logoIcon.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\cinema.png"));
 		
 		logoIcon.setBounds(633, 264, 226, 266);
 		panel_Khung.add(logoIcon);
 		
 		JLabel Background = new JLabel("");
-		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\ChairBackground.png"));
+		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
 		Background.setBounds(-16, -36, 960, 447);
 		panel_Khung.add(Background);
 		
@@ -370,24 +370,24 @@ public class chonGhe extends JFrame {
 			c = jdbc_new.getConnection();
 			
 			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
+			ResultSet result = st.executeQuery("SELECT * FROM hientai");
 			
 			while (result.next()) {
-				xh = Integer.parseInt(result.getString("tenPhim"));
+				xh = Integer.parseInt(result.getString("maXCn"));
 			}
 			
 			switch (xh)
 			{
-				case 1:{
-					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\Poster_phim\\keAnHon.png"));
+				case 312:{
+					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\inside_out_2.png"));
 					break;
 				}
-				case 2:{
-					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\Poster_phim\\NGUOIVOCUOICUNG.png"));
+				case 465:{
+					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\Deadpool&Wolverine.png"));
 					break;
 				}
-				case 3:{
-					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\Poster_phim\\WOLFOO.png"));
+				case 798:{
+					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\GodzillaxKong.png"));
 					break;
 				}
 			}

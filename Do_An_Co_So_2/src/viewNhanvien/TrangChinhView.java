@@ -17,6 +17,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import dao.nhanVienDAO;
+import model.inforRapPhim;
 import viewKhachhang.menuDoAn;
 import viewKhachhang.menuNuocUong;
 
@@ -31,10 +33,10 @@ public class TrangChinhView extends JFrame{
 	private JButton vePhim, veThucAn;
 	private JLabel _2uanLabel, cinemaLabel, newTicketLabel;
 	private JLabel[] champ1, champ2, chamt1, chamt2;
-	private int  toadoNgang = 400, toadoDoc = 140;
+	private int  toadoNgang = 448, toadoDoc = 190;
 	private static String tam;
 	private int num = 1;
-	
+	private inforRapPhim infor = new inforRapPhim();
 	
 	/**
 	 * Launch the application.
@@ -59,7 +61,7 @@ public class TrangChinhView extends JFrame{
 	public TrangChinhView() {
 		setTitle("2uan Cinema");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 540);
+		setBounds(100, 100, infor.ngangKhung, infor.docKhung);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
@@ -67,45 +69,17 @@ public class TrangChinhView extends JFrame{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		khung2nut = new JPanel();
-		khung2nut.setBounds(200, 150, 400, 200);
+		khung2nut.setBounds(250, 180, 400, 200);
 		khung2nut.setLayout(null);
 		khung2nut.setBackground(new Color(255,255,255,100));
 		
-		champ1 = new JLabel[4]; 
-		for (int i = 0; i<4; i++) {
-			champ1[i] = new JLabel(".");
-			champ1[i].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
-			champ1[i].setBounds(toadoNgang, 70, 50, 50);
-			contentPane.add(champ1[i]);
-			toadoNgang += 80;
-		}
+		JLabel nvTC = new JLabel(new nhanVienDAO().nvTrongCa());
+		nvTC.setForeground(new Color(138, 91, 65));
+		nvTC.setFont(new Font("STLiti", Font.PLAIN, 25));
+		nvTC.setBounds(765, -20, 213, 76);
+		contentPane.add(nvTC);
 		
-		champ2 = new JLabel[2];
-		for (int j=0; j<2; j++) {
-			champ2[j] = new JLabel(".");
-			champ2[j].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
-			champ2[j].setBounds(640, toadoDoc, 50, 50);
-			contentPane.add(champ2[j]);
-			toadoDoc += 70;
-		}
-		toadoDoc = 240;
-		chamt1 = new JLabel[3];
-		for (int j=0; j<3; j++) {
-			chamt1[j] = new JLabel(".");
-			chamt1[j].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
-			chamt1[j].setBounds(140, toadoDoc, 50, 50);
-			contentPane.add(chamt1[j]);
-			toadoDoc += 70;
-		}
-		toadoNgang=210;
-		chamt2 = new JLabel[3];
-		for (int j=0; j<3; j++) {
-			chamt2[j] = new JLabel(".");
-			chamt2[j].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
-			chamt2[j].setBounds(toadoNgang, 380, 50, 50);
-			contentPane.add(chamt2[j]);
-			toadoNgang += 70;
-		}
+		chamTrangTri();
 		
 		chonThucAnView thucAn = new chonThucAnView();
 		chonXuatChieuView xuatChieu = new chonXuatChieuView();
@@ -159,7 +133,7 @@ public class TrangChinhView extends JFrame{
 		
 		JLabel logo = new JLabel("");
 		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\cinema.png"));
-		logo.setBounds(600, 340, 256, 256);
+		logo.setBounds(700, 340, 256, 256);
 		contentPane.add(logo);
 		
 		setContentPane(contentPane);
@@ -175,10 +149,48 @@ public class TrangChinhView extends JFrame{
 		
 		JLabel Background = new JLabel("");
 		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
-		Background.setBounds(0, 0, 1035, 703);
+		Background.setBounds(0, 0, infor.ngangKhung, infor.docKhung);
 		contentPane.add(Background);
 		
 		
+	}
+	
+	public void chamTrangTri() {
+		champ1 = new JLabel[4]; 
+		for (int i = 0; i<4; i++) {
+			champ1[i] = new JLabel(".");
+			champ1[i].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
+			champ1[i].setBounds(toadoNgang, 120, 50, 50);
+			contentPane.add(champ1[i]);
+			toadoNgang += 80;
+		}
+		
+		champ2 = new JLabel[2];
+		for (int j=0; j<2; j++) {
+			champ2[j] = new JLabel(".");
+			champ2[j].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
+			champ2[j].setBounds(690, toadoDoc, 50, 50);
+			contentPane.add(champ2[j]);
+			toadoDoc += 70;
+		}
+		toadoDoc = 240;
+		chamt1 = new JLabel[3];
+		for (int j=0; j<3; j++) {
+			chamt1[j] = new JLabel(".");
+			chamt1[j].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
+			chamt1[j].setBounds(190, toadoDoc, 50, 50);
+			contentPane.add(chamt1[j]);
+			toadoDoc += 70;
+		}
+		toadoNgang=260;
+		chamt2 = new JLabel[3];
+		for (int j=0; j<3; j++) {
+			chamt2[j] = new JLabel(".");
+			chamt2[j].setFont(new Font("Showcard Gothic", Font.BOLD, 50));
+			chamt2[j].setBounds(toadoNgang, 380, 50, 50);
+			contentPane.add(chamt2[j]);
+			toadoNgang += 70;
+		}
 	}
 
 	

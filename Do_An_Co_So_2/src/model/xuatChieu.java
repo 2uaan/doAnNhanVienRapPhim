@@ -1,26 +1,37 @@
 package model;
 
+import java.sql.Time;
+
 public class xuatChieu {
 	
 	private int maXC;
 	private String tenPhim;
-	private String nhanVien;
+	private int maPhim;
+	private String tenNhanVien;
 	private int soGheNS;
 	private int soGheV;
 	private int soGheC;
-	
+	private String gioBatDau;
+	private String gioKetThuc;
+	private String ngayThang;
 	
 	public xuatChieu() {
 		super();
 	}
 
-	public xuatChieu(int maXC, String tenPhim, String nhanVien, int soGheNS, int soGheV, int soGheC) {
+	public xuatChieu(int maXC, String tenPhim, int maPhim, String tenNhanVien, int soGheNS, int soGheV, int soGheC,
+			String gioBatDau, String gioKetThuc, String ngayThang) {
+		super();
 		this.maXC = maXC;
 		this.tenPhim = tenPhim;
-		this.nhanVien = nhanVien;
+		this.maPhim = maPhim;
+		this.tenNhanVien = tenNhanVien;
 		this.soGheNS = soGheNS;
 		this.soGheV = soGheV;
 		this.soGheC = soGheC;
+		this.gioBatDau = gioBatDau;
+		this.gioKetThuc = gioKetThuc;
+		this.ngayThang = ngayThang;
 	}
 
 	public int getMaXC() {
@@ -39,12 +50,20 @@ public class xuatChieu {
 		this.tenPhim = tenPhim;
 	}
 
-	public String getNhanVien() {
-		return nhanVien;
+	public int getMaPhim() {
+		return maPhim;
 	}
 
-	public void setNhanVien(String nhanVien) {
-		this.nhanVien = nhanVien;
+	public void setMaPhim(int maPhim) {
+		this.maPhim = maPhim;
+	}
+
+	public String getTenNhanVien() {
+		return tenNhanVien;
+	}
+
+	public void setTenNhanVien(String tenNhanVien) {
+		this.tenNhanVien = tenNhanVien;
 	}
 
 	public int getSoGheNS() {
@@ -70,9 +89,32 @@ public class xuatChieu {
 	public void setSoGheC(int soGheC) {
 		this.soGheC = soGheC;
 	}
+
+	public String getGioBatDau() {
+		return gioBatDau;
+	}
+
+	public void setGioBatDau(String gioBatDau) {
+		this.gioBatDau = gioBatDau;
+	}
+
+	public String getGioKetThuc() {
+		return gioKetThuc;
+	}
+
+	public void setGioKetThuc(String gioKetThuc) {
+		this.gioKetThuc = gioKetThuc;
+	}
+
+	public String getNgayThang() {
+		return ngayThang;
+	}
+
+	public void setNgayThang(String ngayThang) {
+		this.ngayThang = ngayThang;
+	}
 	
 	
-	
-	
+
 	
 }

@@ -153,7 +153,7 @@ public class xemChoNgoi extends JFrame {
 		JLabel screen = new JLabel("SCREEN");
 		screen.setBounds(52, 10, 108, 29);
 		screen.setForeground(Color.WHITE);
-		screen.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 25));
+		screen.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 23));
 		Screen.add(screen);
 		
 		tao_ghe_gan_man_hinh();
@@ -373,29 +373,29 @@ public void ktr_ghe_csdl_vip() {
 		Connection c = null;
 		int xh =0;
 		
-		try {
+try {
 			
 			c = jdbc_new.getConnection();
 			
 			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
+			ResultSet result = st.executeQuery("SELECT * FROM hientai");
 			
 			while (result.next()) {
-				xh = Integer.parseInt(result.getString("tenPhim"));
+				xh = Integer.parseInt(result.getString("maXCn"));
 			}
 			
 			switch (xh)
 			{
-				case 1:{
-					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\Poster_phim\\keAnHon.png"));
+				case 312:{
+					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\inside_out_2.png"));
 					break;
 				}
-				case 2:{
-					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\Poster_phim\\NGUOIVOCUOICUNG.png"));
+				case 465:{
+					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\Deadpool&Wolverine.png"));
 					break;
 				}
-				case 3:{
-					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\Poster_phim\\WOLFOO.png"));
+				case 798:{
+					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\GodzillaxKong.png"));
 					break;
 				}
 			}

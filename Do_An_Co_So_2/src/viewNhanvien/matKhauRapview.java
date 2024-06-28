@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import dao.nhanVienDAO;
+import dao.xuatChieuDAO;
 import database.jdbc_new;
 import model.inforRapPhim;
 
@@ -62,21 +64,7 @@ public class matKhauRapview extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		String tennv="";
-		
-		Connection c = null;
-		
-		try {
-			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
-
-			while (result.next()) {
-				tennv = result.getString("nhanvien");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		String tennv=new nhanVienDAO().nvTrongCa();
 		
 		chaoLabel = new JLabel("Rạp 2uanCinema" );
 		chaoLabel.setBackground(new Color(240, 240, 240));

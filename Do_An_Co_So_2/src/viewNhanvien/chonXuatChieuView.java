@@ -18,8 +18,11 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import dao.nhanVienDAO;
 import dao.xuatChieuDAO;
 import database.jdbc_new;
+import model.font;
+import model.inforRapPhim;
 import viewXacNhan.wait;
 
 import javax.swing.JTabbedPane;
@@ -39,7 +42,9 @@ public class chonXuatChieuView extends JFrame {
 	private JCheckBox check_mov1;
 	private JCheckBox check_mov3;
 	private String[] tenP, gioC;
-	
+	private xuatChieuDAO xc = new xuatChieuDAO();
+	private inforRapPhim infor = new inforRapPhim();
+	private font f;
 	
 
 	/**
@@ -64,9 +69,9 @@ public class chonXuatChieuView extends JFrame {
 	public chonXuatChieuView() {
 		setTitle("Xuất Chiếu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
 		setResizable(false);
-		setSize(900, 600);
+		setSize(infor.ngangKhung, infor.docKhung);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -74,19 +79,20 @@ public class chonXuatChieuView extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		tenP = new xuatChieuDAO().duyetTenPhim();
-		gioC = new xuatChieuDAO().duyetGioChieu();
+		f = new font();
+		tenP = xc.duyetTenPhim();
+		gioC = xc.duyetGioChieu();
+		xc.xoaXuatChieuDangChon();
 		
 		
 		khungXuatChieu = new JPanel();
 //		khungXuatChieu.setBorder(UIManager.getBorder("OptionPane.buttonAreaBorder"));
 		khungXuatChieu.setBackground(new Color(201, 192, 151));
-//		khungXuatChieu.setBackground(Color.black);
 		khungXuatChieu.setBounds( 100, 70, 700, 400);
 		
 		Insets in = new Insets(0, 10, 0, 0);
 		
-		Font font = new Font("Consolas", Font.BOLD | Font.ITALIC, 20);
+//		Font font = new Font("Consolas", Font.BOLD | Font.ITALIC, 20);
 		GridBagLayout gbl_khungXuatChieu = new GridBagLayout();
 		gbl_khungXuatChieu.columnWidths = new int[]{145, 350, 0};
 		gbl_khungXuatChieu.rowHeights = new int[]{133, 133, 133, 0};
@@ -96,7 +102,7 @@ public class chonXuatChieuView extends JFrame {
 		
 		nameMov1 = new JLabel(tenP[0]);
 		
-		nameMov1.setFont(font);
+		nameMov1.setFont(f.consolas);
 		
 		GridBagConstraints gbc_nameMov1 = new GridBagConstraints();
 		gbc_nameMov1.fill = GridBagConstraints.BOTH;
@@ -119,7 +125,7 @@ public class chonXuatChieuView extends JFrame {
 		mov1.add(check_mov1);
 		
 		nameMov2 = new JLabel(tenP[1]);
-		nameMov2.setFont(font);
+		nameMov2.setFont(f.consolas);
 		GridBagConstraints gbc_nameMov2 = new GridBagConstraints();
 		gbc_nameMov2.fill = GridBagConstraints.BOTH;
 		gbc_nameMov2.insets = new Insets(0, 10, 5, 5);
@@ -144,7 +150,7 @@ public class chonXuatChieuView extends JFrame {
 		
 		
 		nameMov3 = new JLabel(tenP[2]);
-		nameMov3.setFont(font);
+		nameMov3.setFont(f.consolas);
 		GridBagConstraints gbc_nameMov3 = new GridBagConstraints();
 		gbc_nameMov3.fill = GridBagConstraints.BOTH;
 		gbc_nameMov3.insets = new Insets(0, 10, 0, 5);
@@ -193,22 +199,25 @@ public class chonXuatChieuView extends JFrame {
 	    khungNgoai.add(khungXuatChieu);
 	    contentPane.add(khungNgoai);
 		
-	    
+	    JLabel nvTC = new JLabel(new nhanVienDAO().nvTrongCa());
+		nvTC.setForeground(new Color(138, 91, 65));
+		nvTC.setFont(new Font("STLiti", Font.PLAIN, 25));
+		nvTC.setBounds(765, -20, 213, 76);
+		contentPane.add(nvTC);
 	    
 		JLabel logo = new JLabel();
-		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\toolkit.png"));
+		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\toolkit.png"));
 		logo.setBounds(500, -150, 512, 512);
 		contentPane.add(logo);
 		JLabel camera = new JLabel();
-		camera.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\nenMayQuay.png"));
+		camera.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\nenMayQuay.png"));
 		camera.setBounds(-86, 301, 400, 400);
 		contentPane.add(camera);
 		
 		JLabel Background = new JLabel("");
-		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\ChairBackground.png"));
-		Background.setBounds(0, 0, 909, 581);
+		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
+		Background.setBounds(0, 0, infor.ngangKhung, infor.docKhung);
 		contentPane.add(Background);
-		
 		
 	}
 	
@@ -224,7 +233,7 @@ public class chonXuatChieuView extends JFrame {
 			phim=798; 
 		}
 		
-		new xuatChieuDAO().luuXuatChieuDangChon(phim);
+		xc.luuXuatChieuDangChon(phim);
 		
 	}
 

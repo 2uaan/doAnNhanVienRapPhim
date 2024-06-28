@@ -26,6 +26,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.gheCDAO;
 import dao.gheNSDAO;
+import dao.nhanVienDAO;
 import dao.xuatChieuDAO;
 import database.jdbc_new;
 import model.inforRapPhim;
@@ -37,7 +38,7 @@ public class loginNVview extends JFrame {
 	private JPanel contentPane;
 	private JLabel background, _2uanLabel, cinemaLabel, manvLabel, marapLabel;
 	private JTextField manvTextField, marapTextField;
-	private nhanVien nVien[] = null;
+	private nhanVien nVien[] = new nhanVienDAO().duyetNV();
 	
 	/**
 	 * Launch the application.
@@ -59,7 +60,7 @@ public class loginNVview extends JFrame {
 	 * Create the frame.
 	 */
 	public loginNVview() {
-		duyet_csdl_nv();
+//		duyet_csdl_nv();
 		setTitle("2uan Cinema");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\2c_toolkit.png"));
@@ -74,7 +75,6 @@ public class loginNVview extends JFrame {
 		
 		
 		JButton loginButton = new JButton("→");
-		
 		
 		xacnhanNV tc = new xacnhanNV();	
 		
@@ -160,37 +160,4 @@ public class loginNVview extends JFrame {
 		background.setBounds(0, 0, 1000, 675);
 		contentPane.add(background);
 	}
-	int sonv = 0;
-	public void duyet_csdl_nv() {
-		Connection c = null;
-		
-		try {
-			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM nhanvien");
-			
-			while (result.next()) {
-				String tam = result.getString("hoVaTen");
-				sonv++;
-			}
-			ResultSet resul = st.executeQuery("SELECT * FROM nhanvien");
-			nVien = new nhanVien[sonv];
-			int i = 0;
-			while (resul.next()) {
-				nVien[i] = new nhanVien();
-				sonv--;
-				int manv = resul.getInt("maNV");
-				String tennv = resul.getString("hoVaTen");
-				nVien[i].setHoVaTen(tennv);
-				nVien[i].setMaNV(manv);
-				i++;
-			}
-			
-			jdbc_new.closeConnection(c);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-	
 }

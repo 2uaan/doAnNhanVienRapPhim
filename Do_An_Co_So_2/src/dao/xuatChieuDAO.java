@@ -14,13 +14,69 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 	private Connection c = null;
 	
 	
+	public xuatChieu[] duyetXC() {
+		xuatChieu xc[] = null;
+		String temp, tenPhim, tenNhanVien, gioBatDau, gioKetThuc, ngayThang;
+		int soXC, maXC, maPhim, soGheNS, soGheC, soGheV;
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			Statement st = c.createStatement();
+			ResultSet result = st.executeQuery("SELECT * FROM xuatChieuHienTai");
+			soXC = 0;
+			while (result.next()) {
+				temp = result.getString("tenPhim");
+				soXC++;
+			}
+			
+			xc = new xuatChieu[soXC];
+			soXC=0;
+			ResultSet resul = st.executeQuery("SELECT * FROM xuatChieuHienTai");
+			while (resul.next()) {
+				xc[soXC] = new xuatChieu();
+				maXC = resul.getInt("maXC");
+				maPhim = resul.getInt("maPhim");
+				soGheNS = resul.getInt("tongGheNS");
+				soGheV = resul.getInt("tongGheV");
+				soGheC = resul.getInt("tongGheC");
+				tenPhim = resul.getString("tenPhim");
+				tenNhanVien = resul.getString("tenNhanVien");
+				gioBatDau = resul.getString("gioBatDau");
+				gioKetThuc = resul.getString("gioKetThuc");
+				ngayThang = resul.getString("ngayThang");
+				
+				xc[soXC].setMaXC(maXC);
+				xc[soXC].setTenPhim(tenPhim);
+				xc[soXC].setMaPhim(maPhim);
+				xc[soXC].setSoGheC(soGheC);
+				xc[soXC].setSoGheNS(soGheNS);
+				xc[soXC].setSoGheV(soGheV);
+				xc[soXC].setTenNhanVien(tenNhanVien);
+				xc[soXC].setGioBatDau(gioBatDau);
+				xc[soXC].setGioKetThuc(gioKetThuc);
+				xc[soXC].setNgayThang(ngayThang);
+				
+				soXC++;
+				
+				
+			}
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return xc;
+	}
+	
 	public String[] duyetTenPhim() {
 		String[] tenP = new String[3]; 
 		try {
 			
 			c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
+			ResultSet result = st.executeQuery("SELECT * FROM phimDangChieu");
 			int i = 0;
 			while (result.next()) {
 				tenP[i] = result.getString("tenPhim");
@@ -81,7 +137,7 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 			
 			c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
-			String sql = "UPDATE xuatchieuhientai\n SET nhanvien = '" + t.getHoVaTen() + "';";
+			String sql = "UPDATE xuatchieuhientai\n SET tenNhanVien = '" + t.getHoVaTen() + "';";
 			int kq = st.executeUpdate(sql);
 			jdbc_new.closeConnection(c);
 			
@@ -122,14 +178,14 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 		return 0;
 	}
 
-	public int luuXuatChieuDangChon(int maXC) {
+	public void luuXuatChieuDangChon(int maPhim) {
 		
 		try {
 			
 			c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
 			String sql = "INSERT INTO hientai(maXCn)"
-					+ "\nVALUES (" + maXC +")";
+					+ "\nVALUES (" + maPhim +")";
 			
 			int kq = st.executeUpdate(sql);
 			
@@ -139,7 +195,24 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 			// TODO: handle exception
 		}
 		
-		return maXC;
+	}
+	
+	public void xoaXuatChieuDangChon() {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			Statement st = c.createStatement();
+			String sql = "DELETE FROM hientai";
+			
+			int kq = st.executeUpdate(sql);
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 }
