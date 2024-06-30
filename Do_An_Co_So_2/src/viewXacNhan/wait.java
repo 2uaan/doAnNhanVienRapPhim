@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import viewKhachhang.xemChoNgoi;
 import viewNhanvien.chonGhe;
+import viewNhanvien.chonGheNew;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -61,12 +62,12 @@ public class wait extends JFrame {
 		JButton next = new JButton("→");
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				xemChoNgoi xcn = new xemChoNgoi();
-				chonGhe cg = new chonGhe();
+//				xemChoNgoi xcn = new xemChoNgoi();
+				chonGheNew cg = new chonGheNew();
 				setVisible(false);
 				
 				cg.setVisible(true);
-				xcn.setVisible(true);
+//				xcn.setVisible(true);
 				
 			}
 		});

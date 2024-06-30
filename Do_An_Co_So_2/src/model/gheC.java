@@ -1,6 +1,6 @@
 package model;
 
-public class gheNS {
+public class gheC {
 	
 	private char hang;
 	private int cot;
@@ -10,13 +10,13 @@ public class gheNS {
 	
 	
 	
-	public gheNS() {
+	public gheC() {
 		super();
 	}
 
 
 
-	public gheNS(char hang, int cot, String tenGhe, int maXC, int trangThai) {
+	public gheC(char hang, int cot, String tenGhe, int maXC, int trangThai) {
 		super();
 		this.hang = hang;
 		this.cot = cot;
@@ -84,8 +84,4 @@ public class gheNS {
 	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
 	}
-
-	
-	
-	
 }

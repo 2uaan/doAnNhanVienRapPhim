@@ -4,6 +4,7 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -18,10 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import dao.nhanVienDAO;
 import dao.xuatChieuDAO;
 import model.font;
 import model.inforRapPhim;
 import model.xuatChieu;
+import viewXacNhan.wait;
 
 public class chonXuatChieuVie extends JFrame{
 	private JPanel contentPane, khungXuatChieu, khungNgoai, movTime[], inmovTime[];
@@ -75,6 +78,8 @@ public class chonXuatChieuVie extends JFrame{
 		
 		khungXC = new GridLayout(3,2);
 		khungXC.setVgap(20);
+		wait xacNhanChonXC = new wait();
+		
 		for (int i = 0; i<6; i++) {
 			if (i % 2 == 0) {
 				tenPhim[i/2] = new JTextArea(tenP[i/2]);
@@ -86,7 +91,6 @@ public class chonXuatChieuVie extends JFrame{
 				tenPhim[i/2].setMargin(new Insets(30, 10, 0, 0));
 				khungXuatChieu.add(tenPhim[i/2]);
 			}else {
-				
 				movTime[(i-1)/2] = new JPanel();
 				inmovTime[(i-1)/2] = new JPanel();
 				movTime[(i-1)/2].setBackground(new Color(140, 97, 15));
@@ -96,14 +100,15 @@ public class chonXuatChieuVie extends JFrame{
 				inmovTime[(i-1)/2].setLayout(new FlowLayout());
 				for (j =0; j< xchieu.length; j++) {
 					if ((xchieu[j].getMaPhim() % 10) - 1 == (i-1)/2) {
-						JButton n = new JButton(xchieu[j].getGioBatDau() + " - " + xchieu[j].getGioKetThuc());
+						JButton n = new JButton(catS(xchieu[j].getGioBatDau()) + " - " + catS(xchieu[j].getGioKetThuc()));
 						n.addActionListener(new ActionListener() {
-							
+						int temp = j;
 							@Override
 							public void actionPerformed(ActionEvent e) {
-								
-								xc.luuXuatChieuDangChon(xchieu[j].getMaPhim());
-								
+								xc.xoaXuatChieuDangChon();
+								xc.luuXuatChieuDangChon(xchieu[temp].getMaXC());
+								setVisible(false);
+								xacNhanChonXC.setVisible(true);
 							}
 						});
 						inmovTime[(i-1)/2].add(n);
@@ -125,12 +130,37 @@ public class chonXuatChieuVie extends JFrame{
 	    khungNgoai.setLayout(null);
 	    khungNgoai.add(khungXuatChieu);
 	    contentPane.add(khungNgoai);
+	    
+	    
+	    JLabel nvTC = new JLabel(new nhanVienDAO().nvTrongCa());
+		nvTC.setForeground(new Color(138, 91, 65));
+		nvTC.setFont(new Font("STLiti", Font.PLAIN, 25));
+		nvTC.setBounds(20, -20, 213, 76);
+		contentPane.add(nvTC);
+	    
+	    JLabel logo = new JLabel();
+		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\toolkit.png"));
+		logo.setBounds(500, -150, 512, 512);
+		contentPane.add(logo);
+		JLabel camera = new JLabel();
+		camera.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\nenMayQuay.png"));
+		camera.setBounds(-86, 301, 400, 400);
+		contentPane.add(camera);
 		
 		JLabel Background = new JLabel("");
 		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
 		Background.setBounds(0, 0, infor.ngangKhung, infor.docKhung);
 		contentPane.add(Background);
 		
+	}
+	
+	public String catS(String str) {
+		String st = "";
+		for (int i = 0; i<5; i++) {
+			st += str.charAt(i);
+		}
+		
+		return st;
 	}
 	
 }

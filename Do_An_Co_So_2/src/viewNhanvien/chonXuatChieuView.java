@@ -204,6 +204,7 @@ public class chonXuatChieuView extends JFrame {
 		nvTC.setFont(new Font("STLiti", Font.PLAIN, 25));
 		nvTC.setBounds(765, -20, 213, 76);
 		contentPane.add(nvTC);
+		
 	    
 		JLabel logo = new JLabel();
 		logo.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\toolkit.png"));

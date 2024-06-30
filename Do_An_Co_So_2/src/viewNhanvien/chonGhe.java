@@ -10,7 +10,9 @@ import javax.swing.border.EmptyBorder;
 
 import com.mysql.cj.protocol.Resultset;
 
+import dao.xuatChieuDAO;
 import database.jdbc_new;
+import model.xuatChieu;
 import viewXacNhan.xacnhanGhe;
 
 import javax.swing.JLabel;
@@ -50,6 +52,7 @@ public class chonGhe extends JFrame {
 	private JPanel poster_phim;
 	private int stt_ns=1,stt_v=1,stt_c=1, hang, cot;
 	private int toadoDoc=108, toadoNgang=105;
+	private xuatChieu xc;
 	
 	/**
 	 * Launch the application.
@@ -360,42 +363,27 @@ public class chonGhe extends JFrame {
 	public void anh_poster() {
 		JLabel poster = new JLabel("");
 		poster.setBounds(0, 5, 150, 225);
-		poster.setBounds(0, 0, 150, 225);
+
 		
+//		xc = new xuatChieuDAO().xuatXuatChieu();
 		Connection c = null;
-		int xh =0;
-		
-		try {
-			
-			c = jdbc_new.getConnection();
-			
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM hientai");
-			
-			while (result.next()) {
-				xh = Integer.parseInt(result.getString("maXCn"));
-			}
-			
-			switch (xh)
+//		int xh =0;
+				
+			switch (xc.getMaPhim())
 			{
-				case 312:{
+				case 111:{
 					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\inside_out_2.png"));
 					break;
 				}
-				case 465:{
+				case 112:{
 					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\Deadpool&Wolverine.png"));
 					break;
 				}
-				case 798:{
+				case 113:{
 					poster.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\Poster_phim\\GodzillaxKong.png"));
 					break;
 				}
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		
 		
 		poster_phim.add(poster);
 	}

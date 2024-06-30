@@ -49,44 +49,21 @@ public class testt {
 	
 	
 		
-//		try {
-//			Connection c = jdbc_new.getConnection();
-//			Statement st = c.createStatement();
-//			String sql = "INSERT INTO ghevip(hang, cot, tenGhe, xuatChieu, trangThai)\nVALUES";
-//			
-//			for (int i =0; i<2; i++) {
-//				char ch = (i==0) ? 'C':'D';
-//				for (int j=0; j<8; j++) {
-//					if (j == 7 && i==1) sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 0 + ");";
-//					else sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 0 + "),";
-//					
-//				}
-//			}
-//			
-//			
-//			
-//			int kq = st.executeUpdate(sql);
-//			
-//			jdbc_new.closeConnection(c);
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		
-		
-		
-		
 		try {
 			Connection c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
-			String sql = "INSERT INTO xuatchieuhientai(maXC, tenPhim, nhanvien, tongGheNS, tongGheV, tongGheC, gioBatDau, gioKetThuc)\nVALUES"
-					+ "\n(312, 'Inside Out 2', null, 16, 16, 8, '16:30', '18:10'),"
-					+ "\n(465, 'Deadpool & Wolverine', null, 16, 16, 8, '18:30', '21:00'),"
-					+ "\n(798, 'Godzilla x Kong: The New Empire', null, 16, 16, 8, '21:20', '23:30');";
+			String sql = "INSERT INTO ghens(hang, cot, tenGhe, maXC, trangThai)\nVALUES";
 			
-			System.out.println(sql);
+			for (int i =0; i<2; i++) {
+				char ch = (i==0) ? 'A':'B';
+				for (int j=0; j<8; j++) {
+					if (j == 7 && i==1) sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 1 + ");";
+					else sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 1 + "),";
+					
+				}
+			}
+			
+			
 			
 			int kq = st.executeUpdate(sql);
 			
@@ -96,6 +73,29 @@ public class testt {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		
+		
+		
+//		try {
+//			Connection c = jdbc_new.getConnection();
+//			Statement st = c.createStatement();
+//			String sql = "INSERT INTO xuatchieuhientai(maXC, tenPhim, nhanvien, tongGheNS, tongGheV, tongGheC, gioBatDau, gioKetThuc)\nVALUES"
+//					+ "\n(312, 'Inside Out 2', null, 16, 16, 8, '16:30', '18:10'),"
+//					+ "\n(465, 'Deadpool & Wolverine', null, 16, 16, 8, '18:30', '21:00'),"
+//					+ "\n(798, 'Godzilla x Kong: The New Empire', null, 16, 16, 8, '21:20', '23:30');";
+//			
+//			System.out.println(sql);
+//			
+//			int kq = st.executeUpdate(sql);
+//			
+//			jdbc_new.closeConnection(c);
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 //		nhanVien t = new nhanVien(234, "Minh Quan");

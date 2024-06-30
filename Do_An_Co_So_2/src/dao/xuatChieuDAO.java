@@ -61,7 +61,7 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 				
 				
 			}
-			
+			jdbc_new.closeConnection(c);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -178,14 +178,14 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 		return 0;
 	}
 
-	public void luuXuatChieuDangChon(int maPhim) {
+	public void luuXuatChieuDangChon(int maXC) {
 		
 		try {
 			
 			c = jdbc_new.getConnection();
 			Statement st = c.createStatement();
 			String sql = "INSERT INTO hientai(maXCn)"
-					+ "\nVALUES (" + maPhim +")";
+					+ "\nVALUES (" + maXC +")";
 			
 			int kq = st.executeUpdate(sql);
 			
@@ -213,6 +213,38 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 			// TODO: handle exception
 		}
 		
+	}
+	
+	public int[] xuatXuatChieu() {
+		xuatChieu xc[] = duyetXC();
+		int maXC =0 ;
+		int maPhim = 0;
+		int ma[] = new int[2];
+		try {
+			
+			c = jdbc_new.getConnection();
+			
+			Statement st = c.createStatement();
+			ResultSet result = st.executeQuery("SELECT * FROM hientai");
+			
+			while (result.next()) {
+				maXC = Integer.parseInt(result.getString("maXCn"));
+			}
+			
+			for (int i = 0; i< xc.length; i++) {
+				if (xc[i].getMaXC() == maXC) {
+					maPhim = xc[i].getMaPhim();
+				}
+			}
+			
+			ma[0] = maXC;
+			ma[1] = maPhim;
+			jdbc_new.closeConnection(c);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return ma;
 	}
 	
 }

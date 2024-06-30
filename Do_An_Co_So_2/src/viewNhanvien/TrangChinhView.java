@@ -82,7 +82,7 @@ public class TrangChinhView extends JFrame{
 		chamTrangTri();
 		
 		chonThucAnView thucAn = new chonThucAnView();
-		chonXuatChieuView xuatChieu = new chonXuatChieuView();
+		chonXuatChieuVie xuatChieu = new chonXuatChieuVie();
 		menuDoAn menudoan = new menuDoAn();
 		menuNuocUong menunuoc = new menuNuocUong();
 		
