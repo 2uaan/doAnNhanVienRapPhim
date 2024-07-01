@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import viewKhachhang.xemChoNgoi;
-import viewNhanvien.chonGhe;
 
 import javax.swing.JLabel;
 import java.awt.Font;

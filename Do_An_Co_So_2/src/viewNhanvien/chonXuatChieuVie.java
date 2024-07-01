@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.nhanVienDAO;
 import dao.xuatChieuDAO;
+import model.color;
 import model.font;
 import model.inforRapPhim;
 import model.xuatChieu;
@@ -36,6 +37,9 @@ public class chonXuatChieuVie extends JFrame{
 	private String tenP[] = xc.duyetTenPhim();
 	private xuatChieu xchieu[] = xc.duyetXC();
 	private int j=0;
+	private color colo = new color();
+	private font font = new font();
+	private JButton quaylai;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,6 +78,22 @@ public class chonXuatChieuVie extends JFrame{
 //		khungXuatChieu.setBorder(UIManager.getBorder("OptionPane.buttonAreaBorder"));
 		khungXuatChieu.setBackground(new Color(201, 192, 151));
 		khungXuatChieu.setBounds( 5, 5,710, 400);
+		
+//		TrangChinhView tc = new TrangChinhView();
+		
+		quaylai = new JButton("←");
+		quaylai.setBounds(35, 45, 70, 25);
+		quaylai.setBackground(colo.screenColor);
+		quaylai.setForeground(Color.white);
+		quaylai.setFont(font.setTilt_Neon_Size(20));
+		quaylai.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+//				tc.setVisible(true);
+				setVisible(false);
+			}
+		});
 		
 		
 		khungXC = new GridLayout(3,2);

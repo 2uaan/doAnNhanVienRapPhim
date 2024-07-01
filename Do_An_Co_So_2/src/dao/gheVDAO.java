@@ -2,10 +2,12 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import database.jdbc_new;
+import model.gheC;
 import model.gheNS;
 import model.gheV;
 
@@ -76,6 +78,51 @@ public class gheVDAO implements DAOinterface<gheV>{
 		return v;
 	}
 	
+	
+	public String cat_ky_tu_cuoi(String str) {
+		String strr = "";
+		
+		for (int i =0; i<str.length()-1; i++) {
+			strr += str.charAt(i);
+		}
+		
+		return strr;
+	}
+	
+	public void duyet_gheV_dang_chon(gheV[] v, int maXC, boolean[] checkV) {
+//		ns = null;
+		boolean check = false;
+		
+		for (int i =0; i< checkV.length; i++) {
+			if (checkV[i] == false) {
+				check = true;
+			}
+		}
+		
+		if (check) {
+			try {
+				c = jdbc_new.getConnection();
+				Statement st = c.createStatement();
+				String sql = "INSERT INTO ghedangduocchon\nVALUES";
+				for (int i = 0; i<v.length; i++) {
+					if (!checkV[i]) {
+						
+						sql += "\n(" +maXC+",'" + v[i].getTenGhe() + "','V'),";
+						
+					}
+				}
+				sql = cat_ky_tu_cuoi(sql) + ";";
+				
+				int kq = st.executeUpdate(sql);
+				jdbc_new.closeConnection(c);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+	}
 	
 	@Override
 	public int insert(gheV t) {

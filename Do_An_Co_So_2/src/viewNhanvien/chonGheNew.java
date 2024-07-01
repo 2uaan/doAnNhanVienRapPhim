@@ -3,7 +3,10 @@ package viewNhanvien;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import dao.gheCDAO;
@@ -20,9 +24,12 @@ import dao.gheNSDAO;
 import dao.gheVDAO;
 import dao.xuatChieuDAO;
 import model.*;
+import viewXacNhan.xacnhanGhe;
 
 public class chonGheNew extends JFrame{
 	
+	private String[][] giaBan = {{"NS","75.000đ"},{"V","90.000đ"},{"C","200.000đ"}};
+	private String[] kyHieu = {"Gần Màn Hình", "Vip", "Couple", "Đã Bán"};
 	private color colo = new color();
 	private font font;
 	private JPanel contentPane, screen, ghens, ghev, ghec;
@@ -33,8 +40,10 @@ public class chonGheNew extends JFrame{
 	private gheV[] v = new gheVDAO().duyetGhe(ma[0]);
 	private gheC[] c = new gheCDAO().duyetGhe(ma[0]);
 	private JLabel Screen;
-	public JButton quaylai;
-	
+	public JButton quaylai, next;
+	boolean colorIsNS[] = new boolean[ns.length];
+	boolean colorIsV[] = new boolean[v.length];
+	boolean colorIsC[] = new boolean[c.length];
 	private int toaDoNgang, toaDoDoc;
 	
 	
@@ -68,10 +77,10 @@ public class chonGheNew extends JFrame{
 		
 		font = new font();
 		quaylai = new JButton("←");
-		quaylai.setBounds(35, 45, 70, 25);
+		quaylai.setBounds(35, 45, 70, 35);
 		quaylai.setBackground(colo.screenColor);
 		quaylai.setForeground(Color.white);
-		quaylai.setFont(font.setTilt_Neon_Size(20));
+		quaylai.setFont(font.setTilt_Neon_Size(30));
 		
 		
 		quaylai.addActionListener(new ActionListener() {
@@ -96,7 +105,7 @@ public class chonGheNew extends JFrame{
 		
 		contentPane.add(screen);
 		toaDoNgang = 100;
-		toaDoDoc = 160;
+		toaDoDoc = 145;
 		
 		tao_ghe_ns();
 		
@@ -108,7 +117,33 @@ public class chonGheNew extends JFrame{
 		
 		tao_ghe_couple();
 		
+		xacnhanGhe xn = new xacnhanGhe();
+		
+		next = new JButton("→");
+		next.setBackground(colo.nauXam);
+		next.setForeground(colo.nauVang);
+		next.setFont(font.setTilt_Neon_Size(30));
+		next.setBounds(800, 520, 70, 35);
+		next.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				new gheNSDAO().duyet_gheNS_dang_chon(ns, ma[0], colorIsNS);
+				new gheVDAO().duyet_gheV_dang_chon(v, ma[0], colorIsV);
+				new gheCDAO().duyet_gheC_dang_chon(c, ma[0], colorIsC);
+				setVisible(false);
+				xn.setVisible(true);
+			}
+		});
+		contentPane.add(next);
+		
 		anh_poster_phim();
+		
+		tao_gia_ghe();
+		tao_ky_hieu();
+		
+		decor_poster();
 		
 		JLabel Background = new JLabel("");
 		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
@@ -116,7 +151,7 @@ public class chonGheNew extends JFrame{
 		contentPane.add(Background);
 	}
 	
-	boolean colorIsNS[] = new boolean[ns.length];
+	
 	private void tao_ghe_ns() {
 		
 		for (int i = 0; i < ns.length/8; i++) {
@@ -163,11 +198,26 @@ public class chonGheNew extends JFrame{
 				
 				int vitri = (i==0 && j==0) ? 0 : 8*(i+1)-(8-j);
 				boolean state = (v[vitri].getTrangThai() == 0) ? true : false;
+				colorIsV[vitri] = true;
 				
 				JButton temp = new JButton(v[vitri].getTenGhe());
 				temp.setEnabled(state);
 				temp.setBackground((state) ? colo.ghev : Color.DARK_GRAY);
 				temp.setBounds(toaDoNgang, toaDoDoc, 50, 50);
+				temp.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (colorIsV[vitri]) {
+							temp.setBackground(Color.red);
+							v[vitri].setTrangThai(1);
+						}else {
+							temp.setBackground(colo.ghev);
+							v[vitri].setTrangThai(0);
+						}
+						colorIsV[vitri] = !colorIsV[vitri];
+					}
+				});
 				contentPane.add(temp);
 				contentPane.setVisible(false);
 				contentPane.setVisible(true);
@@ -185,11 +235,26 @@ public class chonGheNew extends JFrame{
 				
 				int vitri = (i==0 && j==0) ? 0 : 4*(i+1)-(4-j);
 				boolean state = (c[vitri].getTrangThai() == 0) ? true : false;
+				colorIsC[vitri] = true;
 				
 				JButton temp = new JButton(c[vitri].getTenGhe());
 				temp.setEnabled(state);
 				temp.setBackground((state) ? colo.ghec : Color.DARK_GRAY);
 				temp.setBounds(toaDoNgang, toaDoDoc, 100, 50);
+				temp.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (colorIsC[vitri]) {
+							temp.setBackground(Color.red);
+							c[vitri].setTrangThai(1);
+						}else {
+							temp.setBackground(colo.ghec);
+							c[vitri].setTrangThai(0);
+						}
+						colorIsC[vitri] = !colorIsC[vitri];
+					}
+				});
 				contentPane.add(temp);
 				contentPane.setVisible(false);
 				contentPane.setVisible(true);
@@ -200,9 +265,86 @@ public class chonGheNew extends JFrame{
 		}
 	}
 	
+	public void tao_ky_hieu() {
+		int doc =50;
+		for (int i =0; i< kyHieu.length; i++) {
+			JPanel bao = new JPanel();
+			bao.setLayout(new FlowLayout());
+			bao.setBounds(doc, 520, (i==0) ? 150: 100, 30);
+			bao.setBackground(colo.trongSuot);;
+			doc+= (i==0) ? 150: 110;
+			
+			JButton kyhieu = new JButton();
+			kyhieu.setBackground(colo.mau_ky_hieu(kyHieu[i]));
+			kyhieu.setEnabled(false);
+			kyhieu.setBorderPainted(false);
+			
+			JLabel ghiChu = new JLabel(": "+kyHieu[i]);
+			ghiChu.setFont(font.setTilt_Neon_Size(12));
+			ghiChu.setForeground(colo.screenColor);
+			
+			bao.add(kyhieu);
+			bao.add(ghiChu);
+			
+			contentPane.add(bao);
+			contentPane.setVisible(false);
+			contentPane.setVisible(true);
+		}
+	}
+	
+	public void tao_gia_ghe() {
+		int doc = 170;
+		for (int i =0; i< giaBan.length; i++) {
+				JPanel bao = new JPanel();
+				bao.setLayout(new GridLayout(2,0));
+				bao.setBackground(colo.trongSuot);
+				bao.setBounds(20, doc, 100, 50);
+				
+				
+				JLabel loaiGhe = new JLabel(giaBan[i][0]);
+				JLabel giaGhe = new JLabel(giaBan[i][1]);
+				loaiGhe.setForeground(colo.mau_ten_ghe(giaBan[i][0]));
+				giaGhe.setBackground(Color.DARK_GRAY);
+				loaiGhe.setLocation((i==0) ? 30:70, 0);
+				giaGhe.setLocation(0, 30);
+				loaiGhe.setFont(font.setUTMfacebookKnT(30));
+				giaGhe.setFont(font.setUTMtimes(12));
+				
+				bao.add(loaiGhe);
+				bao.add(giaGhe);
+				
+				contentPane.add(bao);
+				contentPane.setVisible(false);
+				contentPane.setVisible(true);
+				doc += 125;
+			
+				
+		}
+	}
+	
+	public void decor_poster() {
+		int doc = 10;
+		for (int i=0; i<2; i++) {
+			
+			Color[] temp = colo.mau_decor_poster(ma[1]);
+			
+			JButton khung = new JButton();
+			khung.setBackground(temp[i]);
+			khung.setEnabled(false);
+			khung.setBounds(535, doc, 330, 50);
+			khung.setBorderPainted(false);
+			
+			
+			contentPane.add(khung);
+			contentPane.setVisible(false);
+			contentPane.setVisible(true);
+			doc+=450;
+		}
+	}
+	
 	public void anh_poster_phim() {
 		JLabel poster = new JLabel("");
-		poster.setBounds(550, 60, 300, 450);
+		poster.setBounds(550, 35, 300, 450);
 		
 		switch (ma[1])
 		{

@@ -56,6 +56,8 @@ public class nhanVienDAO implements DAOinterface<nhanVien>{
 			while (result.next()) {
 				tennv = result.getString("tenNhanVien");
 			}
+			
+			jdbc_new.closeConnection(c);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

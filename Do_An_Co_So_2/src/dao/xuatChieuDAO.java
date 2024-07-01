@@ -82,7 +82,7 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 				tenP[i] = result.getString("tenPhim");
 				i++;
 			}
-			
+			jdbc_new.closeConnection(c);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

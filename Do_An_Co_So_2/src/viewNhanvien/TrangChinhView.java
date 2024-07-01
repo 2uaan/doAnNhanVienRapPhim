@@ -83,8 +83,6 @@ public class TrangChinhView extends JFrame{
 		
 		chonThucAnView thucAn = new chonThucAnView();
 		chonXuatChieuVie xuatChieu = new chonXuatChieuVie();
-		menuDoAn menudoan = new menuDoAn();
-		menuNuocUong menunuoc = new menuNuocUong();
 		
 		veThucAn = new JButton("FOOD");
 		veThucAn.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\popcorn.png"));
@@ -97,8 +95,6 @@ public class TrangChinhView extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				thucAn.setVisible(true);
-				menudoan.setVisible(true);
-				menunuoc.setVisible(true);
 			}
 		});
 		

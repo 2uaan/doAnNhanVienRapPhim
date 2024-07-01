@@ -17,15 +17,17 @@ public class tesst {
 	
 	public static void main(String[] args) {
 		
-		int so;
+//		int so;
+//		
+////		gheNS[][] ns = new gheNSDAO().duyetGhe(798);
+//		for (int i =0; i< 2; i++) {
+//			for (int j = 0; j<8; j++) {
+//				so = (i==0 && j==0) ? 0 : 8*(i+1) - (8-j);
+//				System.out.println(so);
+//			}
+//		}		
 		
-//		gheNS[][] ns = new gheNSDAO().duyetGhe(798);
-		for (int i =0; i< 2; i++) {
-			for (int j = 0; j<8; j++) {
-				so = (i==0 && j==0) ? 0 : 8*(i+1) - (8-j);
-				System.out.println(so);
-			}
-		}		
+		
 		
 //		int temp = xchieu.xuatXuatChieu();
 //		

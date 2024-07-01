@@ -49,7 +49,7 @@ public class menuNuocUong extends JFrame {
 	public menuNuocUong() {
 		setTitle("DRINK");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\cola.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\cola.png"));
 		setBounds(710, 50, 500, 750);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,7 +63,7 @@ public class menuNuocUong extends JFrame {
 		
 		JLabel BackGround = new JLabel("");
 		BackGround.setBounds(0, -10, 500, 750);
-		BackGround.setIcon(new ImageIcon("C:\\Users\\tlmqu\\OneDrive\\Desktop\\Java old\\Do_An_Co_So_2\\image\\drink menu.png"));
+		BackGround.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\drink menu.png"));
 		contentPane.add(BackGround);
 		
 	}

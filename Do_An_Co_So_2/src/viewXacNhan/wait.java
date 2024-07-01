@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import viewKhachhang.xemChoNgoi;
-import viewNhanvien.chonGhe;
 import viewNhanvien.chonGheNew;
 
 import javax.swing.JLabel;
@@ -62,12 +61,10 @@ public class wait extends JFrame {
 		JButton next = new JButton("→");
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				xemChoNgoi xcn = new xemChoNgoi();
 				chonGheNew cg = new chonGheNew();
 				setVisible(false);
 				
 				cg.setVisible(true);
-//				xcn.setVisible(true);
 				
 			}
 		});

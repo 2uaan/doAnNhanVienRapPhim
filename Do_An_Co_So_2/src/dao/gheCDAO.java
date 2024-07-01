@@ -2,12 +2,14 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 
 import database.jdbc_new;
 import model.gheC;
+import model.gheNS;
 
 public class gheCDAO implements DAOinterface<gheC>{
 
@@ -73,6 +75,51 @@ public class gheCDAO implements DAOinterface<gheC>{
 		}
 		
 		return ns;
+	}
+	
+	public String cat_ky_tu_cuoi(String str) {
+		String strr = "";
+		
+		for (int i =0; i<str.length()-1; i++) {
+			strr += str.charAt(i);
+		}
+		
+		return strr;
+	}
+	
+	public void duyet_gheC_dang_chon(gheC[] cou, int maXC, boolean[] checkC) {
+//		ns = null;
+		boolean check = false;
+		
+		for (int i =0; i< checkC.length; i++) {
+			if (checkC[i] == false) {
+				check = true;
+			}
+		}
+		
+		if (check) {
+			try {
+				c = jdbc_new.getConnection();
+				Statement st = c.createStatement();
+				String sql = "INSERT INTO ghedangduocchon\nVALUES";
+				for (int i = 0; i<cou.length; i++) {
+					if (!checkC[i]) {
+						
+						sql += "\n(" +maXC+",'" + cou[i].getTenGhe() + "','C'),";
+						
+					}
+				}
+				sql = cat_ky_tu_cuoi(sql) + ";";
+				
+				int kq = st.executeUpdate(sql);
+				jdbc_new.closeConnection(c);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
 	}
 	
 	

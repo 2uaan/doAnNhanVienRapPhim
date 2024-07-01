@@ -88,12 +88,8 @@ public class xacnhanGhe extends JFrame {
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				chonThucAnView cta = new chonThucAnView();
-				menuDoAn md = new menuDoAn();
-				menuNuocUong mn = new menuNuocUong();
 				setVisible(false);
 				cta.setVisible(true);
-				md.setVisible(true);
-				mn.setVisible(true);
 			}
 		});
 		next.setBackground(new Color(120, 67, 21));

@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -90,39 +91,68 @@ public class gheNSDAO implements DAOinterface<gheNS>{
 		}
 	}
 	
+	public String cat_ky_tu_cuoi(String str) {
+		String strr = "";
+		
+		for (int i =0; i<str.length()-1; i++) {
+			strr += str.charAt(i);
+		}
+		
+		return strr;
+	}
+	
+	
+	public void duyet_gheNS_dang_chon(gheNS[] ns, int maXC, boolean[] checkNS) {
+//		ns = null;
+		boolean check = false;
+		
+		for (int i =0; i< checkNS.length; i++) {
+			if (checkNS[i] == false) {
+				check = true;
+			}
+		}
+		
+		if (check) {
+			try {
+				c = jdbc_new.getConnection();
+				Statement st = c.createStatement();
+				String sql = "INSERT INTO ghedangduocchon\nVALUES";
+				for (int i = 0; i<ns.length; i++) {
+					if (!checkNS[i]) {
+						
+						sql += "\n(" +maXC+",'" + ns[i].getTenGhe() + "','NS'),";
+						
+					}
+				}
+				sql = cat_ky_tu_cuoi(sql) + ";";
+				
+				int kq = st.executeUpdate(sql);
+				jdbc_new.closeConnection(c);
+			
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+	}
+
 	@Override
 	public int insert(gheNS t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int update(gheNS t) {
+	@Override
+	public int updateAll(gheNS t) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int deleteAll() {
-		
-		int kq = 0;
-		
-		try {
-			
-			Connection c = jdbc_new.getConnection();
-			
-			Statement st = c.createStatement();
-			
-			String sql = "DELETE FROM ghens";
-			
-			kq = st.executeUpdate(sql);
-			
-			jdbc_new.closeConnection(c);
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return kq;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -142,11 +172,8 @@ public class gheNSDAO implements DAOinterface<gheNS>{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
 
-	@Override
-	public int updateAll(gheNS t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 }
