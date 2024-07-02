@@ -35,10 +35,13 @@ public class chonGheNew extends JFrame{
 	private JPanel contentPane, screen, ghens, ghev, ghec;
 	private inforRapPhim infor = new inforRapPhim();
 	private xuatChieuDAO xcdao = new xuatChieuDAO();
+	private gheNSDAO nsdao = new gheNSDAO();
+	private gheVDAO vdao = new gheVDAO();
+	private gheCDAO cdao = new gheCDAO();
 	private int ma[] = xcdao.xuatXuatChieu();
-	private gheNS[] ns = new gheNSDAO().duyetGhe(ma[0]);
-	private gheV[] v = new gheVDAO().duyetGhe(ma[0]);
-	private gheC[] c = new gheCDAO().duyetGhe(ma[0]);
+	private gheNS[] ns = nsdao.duyetGhe(ma[0]);
+	private gheV[] v = vdao.duyetGhe(ma[0]);
+	private gheC[] c = cdao.duyetGhe(ma[0]);
 	private JLabel Screen;
 	public JButton quaylai, next;
 	boolean colorIsNS[] = new boolean[ns.length];
@@ -129,9 +132,13 @@ public class chonGheNew extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				new gheNSDAO().duyet_gheNS_dang_chon(ns, ma[0], colorIsNS);
-				new gheVDAO().duyet_gheV_dang_chon(v, ma[0], colorIsV);
-				new gheCDAO().duyet_gheC_dang_chon(c, ma[0], colorIsC);
+				nsdao.duyet_gheNS_dang_chon(ns, ma[0], colorIsNS);
+				vdao.duyet_gheV_dang_chon(v, ma[0], colorIsV);
+				cdao.duyet_gheC_dang_chon(c, ma[0], colorIsC);
+				nsdao.luu_so_ghe_da_chon(checkFalse(colorIsNS));
+				vdao.luu_so_ghe_da_chon(checkFalse(colorIsV));
+				cdao.luu_so_ghe_da_chon(checkFalse(colorIsC));
+				
 				setVisible(false);
 				xn.setVisible(true);
 			}
@@ -364,5 +371,16 @@ public class chonGheNew extends JFrame{
 	
 		contentPane.add(poster);
 		
+	}
+	
+	public int checkFalse(boolean[] check) {
+		int soCheck = 0;
+		
+		for (int i =0; i<check.length; i++) {
+			if (check[i]) continue;
+			else soCheck++;
+		}
+		
+		return soCheck;
 	}
 }

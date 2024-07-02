@@ -40,6 +40,36 @@ public class color {
 		return color;
 	}
 	
+	public Color mau_thuc_an(String ten) {
+		Color color = null;
+		
+		switch (ten){
+		
+		case "Bắp":{
+			color = new Color(235, 231, 0);
+			break;
+		}
+		case "Nước lọc":{
+			color = new Color(53, 128, 187);
+			break;
+		}
+		case "Snack":{
+			color = new Color(250, 182, 0);
+			break;
+		}
+		case "Coca-cola":{
+			color = new Color(58, 6, 3);
+			break;
+		}	
+		case "7up":{
+			color = new Color(55, 126, 71);
+			break;
+		}
+	}
+		
+		return color;
+	}
+	
 	public Color mau_ten_ghe(String tenGhe) {
 		Color col = null;
 		
@@ -85,4 +115,6 @@ public class color {
 		}
 		return color;
 	}
+	
+	
 }

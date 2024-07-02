@@ -9,7 +9,7 @@ import database.jdbc_new;
 import model.nhanVien;
 import model.xuatChieu;
 
-public class xuatChieuDAO implements DAOinterface<xuatChieu>{
+public class xuatChieuDAO{
 	
 	private Connection c = null;
 	
@@ -125,12 +125,6 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 	}
 	
 	
-	@Override
-	public int insert(xuatChieu t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	public int updateNV(nhanVien t) {
 		
 		try {
@@ -148,35 +142,6 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 		return 0;
 	}
 
-	@Override
-	public int deleteAll() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<xuatChieu> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public xuatChieu selectById(xuatChieu t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<xuatChieu> selectByCondition(String condition) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateAll(xuatChieu t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	public void luuXuatChieuDangChon(int maXC) {
 		
@@ -245,6 +210,25 @@ public class xuatChieuDAO implements DAOinterface<xuatChieu>{
 		}
 		
 		return ma;
+	}
+	
+	public void xoaGheDangChon() {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			Statement st = c.createStatement();
+			String sql = "DELETE FROM ghedangduocchon";
+			
+			System.out.println(sql);
+			
+			int kq = st.executeUpdate(sql);
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 	
 }

@@ -26,4 +26,10 @@ public class font {
 		return tilt_neon;
 	}
 	
+	public Font setUTMWindsorBT(int size) {
+		Font font = new Font("UTM Windsor BT", Font.PLAIN, size);
+		
+		return font;
+	}
+	
 }

@@ -5,9 +5,11 @@ import java.sql.Statement;
 import java.sql.Time;
 
 import dao.gheNSDAO;
+import dao.thucAnDAO;
 import dao.xuatChieuDAO;
 import database.jdbc_new;
 import model.gheNS;
+import model.thucAn;
 import model.xuatChieu;
 
 public class tesst {
@@ -16,6 +18,13 @@ public class tesst {
 	
 	
 	public static void main(String[] args) {
+		
+		thucAn[] th = new thucAnDAO().duyet_do_an();
+		thucAn[] thg = new thucAnDAO().duyet_nuoc_uong();
+		
+		System.out.println(th[0].getGiaThanh());
+		System.out.println(thg[2].getTenMon());
+		
 		
 //		int so;
 //		

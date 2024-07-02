@@ -11,7 +11,7 @@ import model.gheC;
 import model.gheNS;
 import model.gheV;
 
-public class gheVDAO implements DAOinterface<gheV>{
+public class gheVDAO{
 
 	
 	Connection c = null;
@@ -123,41 +123,25 @@ public class gheVDAO implements DAOinterface<gheV>{
 		
 		}
 	}
+		
+	public void luu_so_ghe_da_chon(int soGhe) {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			Statement st = c.createStatement();
+			String sql = "UPDATE hientai\nSET"
+					+ "\nsoGheV = " + soGhe;
+			
+			int kq = st.executeUpdate(sql);
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 	
-	@Override
-	public int insert(gheV t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateAll(gheV t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteAll() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<gheV> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public gheV selectById(gheV t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<gheV> selectByCondition(String condition) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

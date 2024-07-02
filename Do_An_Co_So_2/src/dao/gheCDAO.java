@@ -11,7 +11,7 @@ import database.jdbc_new;
 import model.gheC;
 import model.gheNS;
 
-public class gheCDAO implements DAOinterface<gheC>{
+public class gheCDAO{
 
 	Connection c = null;
 	
@@ -122,41 +122,24 @@ public class gheCDAO implements DAOinterface<gheC>{
 		}
 	}
 	
+	public void luu_so_ghe_da_chon(int soGhe) {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			Statement st = c.createStatement();
+			String sql = "UPDATE hientai\nSET"
+					+ "\nsoGheC = " + soGhe;
+			
+			int kq = st.executeUpdate(sql);
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 	
-	@Override
-	public int insert(gheC t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateAll(gheC t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteAll() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<gheC> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public gheC selectById(gheC t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<gheC> selectByCondition(String condition) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }

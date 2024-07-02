@@ -10,7 +10,7 @@ import database.jdbc_new;
 import model.gheNS;
 import model.xuatChieu;
 
-public class gheNSDAO implements DAOinterface<gheNS>{
+public class gheNSDAO{
 	
 	Connection c = null;
 	
@@ -136,44 +136,25 @@ public class gheNSDAO implements DAOinterface<gheNS>{
 		
 		}
 	}
-
-	@Override
-	public int insert(gheNS t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateAll(gheNS t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteAll() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<gheNS> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public gheNS selectById(gheNS t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<gheNS> selectByCondition(String condition) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	
+	public void luu_so_ghe_da_chon(int soGhe) {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			Statement st = c.createStatement();
+			String sql = "UPDATE hientai\nSET"
+					+ "\nsoGheNS = " + soGhe;
+			
+			int kq = st.executeUpdate(sql);
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 
 	
 }

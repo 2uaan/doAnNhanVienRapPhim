@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import database.jdbc_new;
 import model.nhanVien;
 
-public class nhanVienDAO implements DAOinterface<nhanVien>{
+public class nhanVienDAO{
 	
 	private Connection c = null;
 	
@@ -64,46 +64,6 @@ public class nhanVienDAO implements DAOinterface<nhanVien>{
 		
 		return tennv;
 	}
-	
-	
-	@Override
-	public int insert(nhanVien t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public int deleteAll() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<nhanVien> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public nhanVien selectById(nhanVien t) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<nhanVien> selectByCondition(String condition) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public int updateAll(nhanVien t) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	
 	
 }
