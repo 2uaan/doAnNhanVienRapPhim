@@ -38,7 +38,8 @@ public class loginNVview extends JFrame {
 	private JPanel contentPane;
 	private JLabel background, _2uanLabel, cinemaLabel, manvLabel, marapLabel;
 	private JTextField manvTextField, marapTextField;
-	private nhanVien nVien[] = new nhanVienDAO().duyetNV();
+	private nhanVienDAO nvdao = new nhanVienDAO();
+	private nhanVien nVien[] = nvdao.duyetNV();
 	
 	/**
 	 * Launch the application.
@@ -90,7 +91,7 @@ public class loginNVview extends JFrame {
 					if (ktrMaNv.equals(nVien[i].getMaNV() + "")) {
 						mnv = 1;
 						xuatChieuDAO xc = new xuatChieuDAO();
-						xc.updateNV(nVien[i]);
+						nvdao.updateNV(nVien[i]);
 					}
 				}
 				if (ktrMaRap.equals(new inforRapPhim().marap))

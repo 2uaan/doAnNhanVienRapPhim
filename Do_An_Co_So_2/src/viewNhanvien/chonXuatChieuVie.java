@@ -127,7 +127,7 @@ public class chonXuatChieuVie extends JFrame{
 							public void actionPerformed(ActionEvent e) {
 								xc.xoaXuatChieuDangChon();
 								xc.xoaGheDangChon();
-								xc.luuXuatChieuDangChon(xchieu[temp].getMaXC());
+								xc.luuXuatChieuDangChon(xchieu[temp]);
 								setVisible(false);
 								xacNhanChonXC.setVisible(true);
 							}

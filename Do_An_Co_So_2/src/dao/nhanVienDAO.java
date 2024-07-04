@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -16,22 +17,28 @@ public class nhanVienDAO{
 		int sonv = 0;
 		nhanVien nv[] = null;
 		try {
+			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM nhanvien");
+			String sql = "SELECT * FROM nhanvien";
+			
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			ResultSet result = pst.executeQuery();
 			
 			while (result.next()) {
 				String tam = result.getString("tenNhanVien");
 				sonv++;
 			}
-			ResultSet resul = st.executeQuery("SELECT * FROM nhanvien");
+			
+			result = pst.executeQuery();
+			
 			nv = new nhanVien[sonv];
 			int i = 0;
-			while (resul.next()) {
+			while (result.next()) {
 				nv[i] = new nhanVien();
 				sonv--;
-				int manv = resul.getInt("maNV");
-				String tennv = resul.getString("tenNhanVien");
+				int manv = result.getInt("maNV");
+				String tennv = result.getString("tenNhanVien");
 				nv[i].setHoVaTen(tennv);
 				nv[i].setMaNV(manv);
 				i++;
@@ -50,8 +57,12 @@ public class nhanVienDAO{
 		String tennv = "";
 		try {
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
+			
+			String sql = "SELECT * FROM xuatchieuhientai";
+			
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			ResultSet result = pst.executeQuery();
 
 			while (result.next()) {
 				tennv = result.getString("tenNhanVien");
@@ -65,5 +76,24 @@ public class nhanVienDAO{
 		return tennv;
 	}
 	
+	public int updateNV(nhanVien t) {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			
+			String sql = "UPDATE xuatchieuhientai\n SET tenNhanVien = ?;";
+			
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setString(1, t.getHoVaTen());
+			int kq = pst.executeUpdate();
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return 0;
+	}
 	
 }

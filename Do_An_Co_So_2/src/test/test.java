@@ -10,5 +10,6 @@ public class test {
 		
 		loginNVview lg = new loginNVview();
 		lg.setVisible(true);
+		
 	}
 }

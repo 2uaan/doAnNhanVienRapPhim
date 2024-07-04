@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -22,8 +23,12 @@ public class xuatChieuDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatChieuHienTai");
+			
+			String sql =  "SELECT * FROM xuatChieuHienTai";
+
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			ResultSet result = pst.executeQuery();
 			soXC = 0;
 			while (result.next()) {
 				temp = result.getString("tenPhim");
@@ -31,20 +36,22 @@ public class xuatChieuDAO{
 			}
 			
 			xc = new xuatChieu[soXC];
+			
+			result = pst.executeQuery();
+			
 			soXC=0;
-			ResultSet resul = st.executeQuery("SELECT * FROM xuatChieuHienTai");
-			while (resul.next()) {
+			while (result.next()) {
 				xc[soXC] = new xuatChieu();
-				maXC = resul.getInt("maXC");
-				maPhim = resul.getInt("maPhim");
-				soGheNS = resul.getInt("tongGheNS");
-				soGheV = resul.getInt("tongGheV");
-				soGheC = resul.getInt("tongGheC");
-				tenPhim = resul.getString("tenPhim");
-				tenNhanVien = resul.getString("tenNhanVien");
-				gioBatDau = resul.getString("gioBatDau");
-				gioKetThuc = resul.getString("gioKetThuc");
-				ngayThang = resul.getString("ngayThang");
+				maXC = result.getInt("maXC");
+				maPhim = result.getInt("maPhim");
+				soGheNS = result.getInt("tongGheNS");
+				soGheV = result.getInt("tongGheV");
+				soGheC = result.getInt("tongGheC");
+				tenPhim = result.getString("tenPhim");
+				tenNhanVien = result.getString("tenNhanVien");
+				gioBatDau = result.getString("gioBatDau");
+				gioKetThuc = result.getString("gioKetThuc");
+				ngayThang = result.getString("ngayThang");
 				
 				xc[soXC].setMaXC(maXC);
 				xc[soXC].setTenPhim(tenPhim);
@@ -75,8 +82,12 @@ public class xuatChieuDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM phimDangChieu");
+			
+			String sql = "SELECT * FROM phimDangChieu";
+			
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			ResultSet result = pst.executeQuery();
 			int i = 0;
 			while (result.next()) {
 				tenP[i] = result.getString("tenPhim");
@@ -105,8 +116,9 @@ public class xuatChieuDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM xuatchieuhientai");
+			String sql = "SELECT * FROM xuatchieuhientai";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
 			int i = 0;
 			while (result.next()) {
 				sta = catS(result.getString("gioBatDau"));
@@ -123,36 +135,21 @@ public class xuatChieuDAO{
 		
 		return gioC;
 	}
-	
-	
-	public int updateNV(nhanVien t) {
+
+
+	public void luuXuatChieuDangChon(xuatChieu xc) {
 		
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			String sql = "UPDATE xuatchieuhientai\n SET tenNhanVien = '" + t.getHoVaTen() + "';";
-			int kq = st.executeUpdate(sql);
-			jdbc_new.closeConnection(c);
 			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		return 0;
-	}
-
-
-	public void luuXuatChieuDangChon(int maXC) {
-		
-		try {
-			
-			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
 			String sql = "INSERT INTO hientai(maXCn)"
-					+ "\nVALUES (" + maXC +")";
+					+ "\nVALUES (?)";
 			
-			int kq = st.executeUpdate(sql);
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, xc.getMaXC());
+			
+			int kq = pst.executeUpdate();
 			
 			jdbc_new.closeConnection(c);
 			
@@ -167,10 +164,12 @@ public class xuatChieuDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
+			
 			String sql = "DELETE FROM hientai";
 			
-			int kq = st.executeUpdate(sql);
+			PreparedStatement pst = c.prepareStatement(sql);
+			
+			int kq = pst.executeUpdate();
 			
 			jdbc_new.closeConnection(c);
 			
@@ -189,8 +188,10 @@ public class xuatChieuDAO{
 			
 			c = jdbc_new.getConnection();
 			
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM hientai");
+			String sql = "SELECT * FROM hientai";
+			
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
 			
 			while (result.next()) {
 				maXC = Integer.parseInt(result.getString("maXCn"));
@@ -217,12 +218,10 @@ public class xuatChieuDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
 			String sql = "DELETE FROM ghedangduocchon";
+			PreparedStatement pst = c.prepareStatement(sql);
 			
-			System.out.println(sql);
-			
-			int kq = st.executeUpdate(sql);
+			int kq = pst.executeUpdate();
 			jdbc_new.closeConnection(c);
 			
 		} catch (Exception e) {

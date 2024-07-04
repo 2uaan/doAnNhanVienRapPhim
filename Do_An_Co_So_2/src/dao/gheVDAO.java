@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,8 +25,11 @@ public class gheVDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM ghevip");
+			String sql = "SELECT * FROM ghev";
+
+			PreparedStatement pst = c.prepareStatement(sql);		
+					
+			ResultSet result = pst.executeQuery();
 			
 			tongSoGhe=0;
 			sta = 0;
@@ -44,21 +48,22 @@ public class gheVDAO{
 			
 			v = new gheV[tongSoGhe];
 			
-			ResultSet resul = st.executeQuery("SELECT * FROM ghevip");
+			result = pst.executeQuery();
 			
 			tongSoGhe = 0;
 			
-			while (resul.next()) {
+
+			while (result.next()) {
 				if (sta > 0) {
 					sta--;
 					continue;
 				}else {
 					v[tongSoGhe] = new gheV();
-					hang = resul.getString("hang");
-					cot = resul.getInt("cot");
-					tenGhe = resul.getString("tenGhe");
-					maXC = resul.getInt("maXC");
-					trangThai = resul.getInt("trangThai");
+					hang = result.getString("hang");
+					cot = result.getInt("cot");
+					tenGhe = result.getString("tenGhe");
+					maXC = result.getInt("maXC");
+					trangThai = result.getInt("trangThai");
 					
 					v[tongSoGhe].setHang(hang.charAt(0));
 					v[tongSoGhe].setCot(cot);
@@ -129,11 +134,14 @@ public class gheVDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
 			String sql = "UPDATE hientai\nSET"
-					+ "\nsoGheV = " + soGhe;
+					+ "\nsoGheNS = ?";
 			
-			int kq = st.executeUpdate(sql);
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, soGhe);
+			
+			
+			int kq = pst.executeUpdate();
 			
 			jdbc_new.closeConnection(c);
 			

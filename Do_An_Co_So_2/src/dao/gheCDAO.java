@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,15 +17,18 @@ public class gheCDAO{
 	Connection c = null;
 	
 	public gheC[] duyetGhe(int maxc) {
-		gheC[] ns = null;
+		gheC[] C = null;
 		int tongSoGhe = 0;
 		String tenGhe, hang;
 		int cot, maXC,temp, trangThai, sta, dem;
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM ghecouple");
+			String sql = "SELECT * FROM ghec";
+
+			PreparedStatement pst = c.prepareStatement(sql);		
+					
+			ResultSet result = pst.executeQuery();
 			
 			tongSoGhe=0;
 			sta = 0;
@@ -41,29 +45,30 @@ public class gheCDAO{
 				dem++;
 			}
 			
-			ns = new gheC[tongSoGhe];
+			C = new gheC[tongSoGhe];
 			
-			ResultSet resul = st.executeQuery("SELECT * FROM ghecouple");
+			result = pst.executeQuery();
 			
 			tongSoGhe = 0;
 			
-			while (resul.next()) {
+
+			while (result.next()) {
 				if (sta > 0) {
 					sta--;
 					continue;
 				}else {
-					ns[tongSoGhe] = new gheC();
-					hang = resul.getString("hang");
-					cot = resul.getInt("cot");
-					tenGhe = resul.getString("tenGhe");
-					maXC = resul.getInt("maXC");
-					trangThai = resul.getInt("trangThai");
+					C[tongSoGhe] = new gheC();
+					hang = result.getString("hang");
+					cot = result.getInt("cot");
+					tenGhe = result.getString("tenGhe");
+					maXC = result.getInt("maXC");
+					trangThai = result.getInt("trangThai");
 					
-					ns[tongSoGhe].setHang(hang.charAt(0));
-					ns[tongSoGhe].setCot(cot);
-					ns[tongSoGhe].setTenGhe(tenGhe);
-					ns[tongSoGhe].setMaXC(maXC);
-					ns[tongSoGhe].setTrangThai(trangThai);
+					C[tongSoGhe].setHang(hang.charAt(0));
+					C[tongSoGhe].setCot(cot);
+					C[tongSoGhe].setTenGhe(tenGhe);
+					C[tongSoGhe].setMaXC(maXC);
+					C[tongSoGhe].setTrangThai(trangThai);
 					tongSoGhe++;
 				}
 			}
@@ -74,7 +79,7 @@ public class gheCDAO{
 			// TODO: handle exception
 		}
 		
-		return ns;
+		return C;
 	}
 	
 	public String cat_ky_tu_cuoi(String str) {
@@ -127,11 +132,14 @@ public class gheCDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
 			String sql = "UPDATE hientai\nSET"
-					+ "\nsoGheC = " + soGhe;
+					+ "\nsoGheNS = ?";
 			
-			int kq = st.executeUpdate(sql);
+			PreparedStatement pst = c.prepareStatement(sql);
+			pst.setInt(1, soGhe);
+			
+			
+			int kq = pst.executeUpdate();
 			
 			jdbc_new.closeConnection(c);
 			

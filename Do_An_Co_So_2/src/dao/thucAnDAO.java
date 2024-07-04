@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -18,8 +19,9 @@ public class thucAnDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM thucan\nWHERE phanLoai = 'doan'");
+			String sql = "SELECT * FROM thucan\nWHERE phanLoai = 'doan'";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
 			
 			sl = 0;
 			while (result.next()) {
@@ -27,7 +29,7 @@ public class thucAnDAO{
 				sl++;
 			}
 			doan = new thucAn[sl];
-			result = st.executeQuery("SELECT * FROM thucan\nWHERE phanLoai = 'doan'");
+			result = pst.executeQuery();
 			sl=0;
 			while (result.next()) {
 				doan[sl] =  new thucAn();
@@ -40,6 +42,8 @@ public class thucAnDAO{
 				doan[sl].setPhanLoai(phanLoai);
 				sl++;
 			}
+			
+			jdbc_new.closeConnection(c);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -56,8 +60,9 @@ public class thucAnDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			ResultSet result = st.executeQuery("SELECT * FROM thucan\nWHERE phanLoai = 'nuoc'");
+			String sql = "SELECT * FROM thucan\nWHERE phanLoai = 'nuoc'";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
 			
 			sl = 0;
 			while (result.next()) {
@@ -65,7 +70,7 @@ public class thucAnDAO{
 				sl++;
 			}
 			nuoc = new thucAn[sl];
-			result = st.executeQuery("SELECT * FROM thucan\nWHERE phanLoai = 'nuoc'");
+			result = pst.executeQuery();
 			sl=0;
 			while (result.next()) {
 				nuoc[sl] =  new thucAn();
@@ -78,6 +83,8 @@ public class thucAnDAO{
 				nuoc[sl].setPhanLoai(phanLoai);
 				sl++;
 			}
+			
+			jdbc_new.closeConnection(c);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
