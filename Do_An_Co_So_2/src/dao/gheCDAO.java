@@ -24,7 +24,7 @@ public class gheCDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			String sql = "SELECT * FROM ghec";
+			String sql = "SELECT * FROM ghecouple";
 
 			PreparedStatement pst = c.prepareStatement(sql);		
 					
@@ -93,7 +93,6 @@ public class gheCDAO{
 	}
 	
 	public void duyet_gheC_dang_chon(gheC[] cou, int maXC, boolean[] checkC) {
-//		ns = null;
 		boolean check = false;
 		
 		for (int i =0; i< checkC.length; i++) {
@@ -105,18 +104,31 @@ public class gheCDAO{
 		if (check) {
 			try {
 				c = jdbc_new.getConnection();
-				Statement st = c.createStatement();
+				
 				String sql = "INSERT INTO ghedangduocchon\nVALUES";
 				for (int i = 0; i<cou.length; i++) {
 					if (!checkC[i]) {
 						
-						sql += "\n(" +maXC+",'" + cou[i].getTenGhe() + "','C'),";
+						sql += "\n(?,?,?),";
 						
 					}
 				}
 				sql = cat_ky_tu_cuoi(sql) + ";";
+
+				int dem = 1;
+				PreparedStatement pst = c.prepareStatement(sql);
+				for (int i = 0; i<cou.length; i++) {
+					if (!checkC[i]) {					
+						pst.setInt(dem*3-2, maXC);
+						pst.setString(dem*3-1, cou[i].getTenGhe());
+						pst.setString(dem*3, "C");
+						dem++;
+					}
+					
+				}
 				
-				int kq = st.executeUpdate(sql);
+				
+				int kq = pst.executeUpdate();
 				jdbc_new.closeConnection(c);
 			
 			} catch (SQLException e) {

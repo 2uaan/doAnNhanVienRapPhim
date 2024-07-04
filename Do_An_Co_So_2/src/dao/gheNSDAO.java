@@ -118,18 +118,31 @@ public class gheNSDAO{
 		if (check) {
 			try {
 				c = jdbc_new.getConnection();
-				Statement st = c.createStatement();
+								
 				String sql = "INSERT INTO ghedangduocchon\nVALUES";
 				for (int i = 0; i<ns.length; i++) {
 					if (!checkNS[i]) {
 						
-						sql += "\n(" +maXC+",'" + ns[i].getTenGhe() + "','NS'),";
+						sql += "\n(?,?,?),";
 						
 					}
 				}
 				sql = cat_ky_tu_cuoi(sql) + ";";
+
+				int dem = 1;
+				PreparedStatement pst = c.prepareStatement(sql);
+				for (int i = 0; i<ns.length; i++) {
+					if (!checkNS[i]) {					
+						pst.setInt(dem*3-2, maXC);
+						pst.setString(dem*3-1, ns[i].getTenGhe());
+						pst.setString(dem*3, "NS");
+						dem++;
+					}
+					
+				}
 				
-				int kq = st.executeUpdate(sql);
+				
+				int kq = pst.executeUpdate();
 				jdbc_new.closeConnection(c);
 			
 			} catch (SQLException e) {

@@ -25,7 +25,7 @@ public class gheVDAO{
 		try {
 			
 			c = jdbc_new.getConnection();
-			String sql = "SELECT * FROM ghev";
+			String sql = "SELECT * FROM ghevip";
 
 			PreparedStatement pst = c.prepareStatement(sql);		
 					
@@ -107,18 +107,31 @@ public class gheVDAO{
 		if (check) {
 			try {
 				c = jdbc_new.getConnection();
-				Statement st = c.createStatement();
+								
 				String sql = "INSERT INTO ghedangduocchon\nVALUES";
 				for (int i = 0; i<v.length; i++) {
 					if (!checkV[i]) {
 						
-						sql += "\n(" +maXC+",'" + v[i].getTenGhe() + "','V'),";
+						sql += "\n(?,?,?),";
 						
 					}
 				}
 				sql = cat_ky_tu_cuoi(sql) + ";";
+
+				int dem = 1;
+				PreparedStatement pst = c.prepareStatement(sql);
+				for (int i = 0; i<v.length; i++) {
+					if (!checkV[i]) {					
+						pst.setInt(dem*3-2, maXC);
+						pst.setString(dem*3-1, v[i].getTenGhe());
+						pst.setString(dem*3, "V");
+						dem++;
+					}
+					
+				}
 				
-				int kq = st.executeUpdate(sql);
+				
+				int kq = pst.executeUpdate();
 				jdbc_new.closeConnection(c);
 			
 			} catch (SQLException e) {
@@ -135,7 +148,7 @@ public class gheVDAO{
 			
 			c = jdbc_new.getConnection();
 			String sql = "UPDATE hientai\nSET"
-					+ "\nsoGheNS = ?";
+					+ "\nsoGheV = ?";
 			
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, soGhe);
