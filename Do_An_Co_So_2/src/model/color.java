@@ -58,7 +58,7 @@ public class color {
 			break;
 		}
 		case "Coca-cola":{
-			color = new Color(58, 6, 3);
+			color = new Color(222, 0, 34);
 			break;
 		}	
 		case "7up":{

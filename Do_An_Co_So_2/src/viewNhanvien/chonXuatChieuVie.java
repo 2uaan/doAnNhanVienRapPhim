@@ -82,19 +82,20 @@ public class chonXuatChieuVie extends JFrame{
 //		TrangChinhView tc = new TrangChinhView();
 		
 		quaylai = new JButton("←");
-		quaylai.setBounds(35, 45, 70, 25);
-		quaylai.setBackground(colo.screenColor);
+		quaylai.setBounds(35, 20, 70, 35);
+		quaylai.setBackground(colo.nauXam);
 		quaylai.setForeground(Color.white);
-		quaylai.setFont(font.setTilt_Neon_Size(20));
+		quaylai.setFont(font.setTilt_Neon_Size(25));
 		quaylai.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				tc.setVisible(true);
+				
 				setVisible(false);
+				new TrangChinhView().setVisible(true);
 			}
 		});
-		
+		contentPane.add(quaylai);
 		
 		khungXC = new GridLayout(3,2);
 		khungXC.setVgap(20);
@@ -156,7 +157,7 @@ public class chonXuatChieuVie extends JFrame{
 	    JLabel nvTC = new JLabel(new nhanVienDAO().nvTrongCa());
 		nvTC.setForeground(new Color(138, 91, 65));
 		nvTC.setFont(new Font("STLiti", Font.PLAIN, 25));
-		nvTC.setBounds(20, -20, 213, 76);
+		nvTC.setBounds(750, 500, 213, 76);
 		contentPane.add(nvTC);
 	    
 	    JLabel logo = new JLabel();

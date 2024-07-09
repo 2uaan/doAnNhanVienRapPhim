@@ -37,6 +37,8 @@ public class TrangChinhView extends JFrame{
 	private static String tam;
 	private int num = 1;
 	private inforRapPhim infor = new inforRapPhim();
+	private chonXuatChieuVie xuatchieu;
+	private chonThucAnView thucan;
 	
 	/**
 	 * Launch the application.
@@ -81,8 +83,8 @@ public class TrangChinhView extends JFrame{
 		
 		chamTrangTri();
 		
-		chonThucAnView thucAn = new chonThucAnView();
-		chonXuatChieuVie xuatChieu = new chonXuatChieuVie();
+		thucan = new chonThucAnView();
+		xuatchieu = new chonXuatChieuVie();
 		
 		veThucAn = new JButton("FOOD");
 		veThucAn.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\popcorn.png"));
@@ -94,7 +96,7 @@ public class TrangChinhView extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				thucAn.setVisible(true);
+				thucan.setVisible(true);
 			}
 		});
 		
@@ -109,7 +111,7 @@ public class TrangChinhView extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				xuatChieu.setVisible(true);
+				xuatchieu.setVisible(true);
 				
 			}
 		});

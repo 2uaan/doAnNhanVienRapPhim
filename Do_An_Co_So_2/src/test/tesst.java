@@ -19,12 +19,18 @@ public class tesst {
 	
 	public static void main(String[] args) {
 		
-		thucAn[] th = new thucAnDAO().duyet_do_an();
-		thucAn[] thg = new thucAnDAO().duyet_nuoc_uong();
+//		thucAn[] th = new thucAnDAO().duyet_do_an();
+//		thucAn[] thg = new thucAnDAO().duyet_nuoc_uong();
+//		
+//		System.out.println(th[0].getGiaThanh());
+//		System.out.println(thg[2].getTenMon());
 		
-		System.out.println(th[0].getGiaThanh());
-		System.out.println(thg[2].getTenMon());
 		
+		String str = "true";
+		
+		if (Boolean.parseBoolean(str)) {
+			System.out.println("Success!!!");
+		}
 		
 //		int so;
 //		
