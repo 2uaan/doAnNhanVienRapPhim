@@ -25,12 +25,14 @@ public class tesst {
 //		System.out.println(th[0].getGiaThanh());
 //		System.out.println(thg[2].getTenMon());
 		
+//		
+//		String str = "true";
+//		
+//		if (Boolean.parseBoolean(str)) {
+//			System.out.println("Success!!!");
+//		}
 		
-		String str = "true";
 		
-		if (Boolean.parseBoolean(str)) {
-			System.out.println("Success!!!");
-		}
 		
 //		int so;
 //		

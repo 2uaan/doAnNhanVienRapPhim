@@ -145,7 +145,7 @@ public class gheCDAO{
 			
 			c = jdbc_new.getConnection();
 			String sql = "UPDATE hientai\nSET"
-					+ "\nsoGheNS = ?";
+					+ "\nsoGheC = ?";
 			
 			PreparedStatement pst = c.prepareStatement(sql);
 			pst.setInt(1, soGhe);

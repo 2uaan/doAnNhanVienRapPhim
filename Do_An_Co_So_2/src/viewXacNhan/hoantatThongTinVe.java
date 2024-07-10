@@ -3,11 +3,13 @@ package viewXacNhan;
 import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.inforRapPhim;
 import viewKhachhang.xemChoNgoi;
 
 import javax.swing.JLabel;
@@ -18,6 +20,7 @@ import java.awt.event.ActionEvent;
 public class hoantatThongTinVe extends JFrame {
 
 	private JPanel contentPane;
+	private inforRapPhim infor = new inforRapPhim();
 
 	/**
 	 * Launch the application.
@@ -61,7 +64,7 @@ public class hoantatThongTinVe extends JFrame {
 		next.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				HoaDon hd = new HoaDon();
+				xuatThongTinVe hd = new xuatThongTinVe();
 				setVisible(false);
 				hd.setVisible(true);
 						
@@ -72,6 +75,11 @@ public class hoantatThongTinVe extends JFrame {
 		next.setForeground(new Color(238, 232,221));
 		next.setBounds(115, 100, 50, 30);
 		contentPane.add(next);
+		
+		JLabel Background = new JLabel("");
+		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
+		Background.setBounds(0, 0, infor.ngangKhung, infor.docKhung);
+		contentPane.add(Background);
 		
 	}
 	

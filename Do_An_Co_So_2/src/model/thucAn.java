@@ -1,6 +1,7 @@
 package model;
 
 public class thucAn {
+	private String maTA;
 	private String tenMon;
 	private int giaThanh;
 	private String phanLoai;
@@ -9,11 +10,20 @@ public class thucAn {
 		super();
 	}
 
-	public thucAn(String tenMon, int giaThanh, String phanLoai) {
+	public thucAn(String maTA, String tenMon, int giaThanh, String phanLoai) {
 		super();
+		this.maTA = maTA;
 		this.tenMon = tenMon;
 		this.giaThanh = giaThanh;
 		this.phanLoai = phanLoai;
+	}
+
+	public String getMaTA() {
+		return maTA;
+	}
+
+	public void setMaTA(String maTA) {
+		this.maTA = maTA;
 	}
 
 	public String getTenMon() {
@@ -39,7 +49,6 @@ public class thucAn {
 	public void setPhanLoai(String phanLoai) {
 		this.phanLoai = phanLoai;
 	}
-	
-	
+
 	
 }

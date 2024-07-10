@@ -30,8 +30,10 @@ public class chonThucAnView extends JFrame{
 	private thucAn[] Doan = null, Nuoc = null;
 	private font font = new font();
 	private color colo = new color();
+	private String[][] luuSoLuong;
 	private boolean[] tongSoLuong;
 	private int slHeight = 400;
+	private JLabel hiensl[];
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,6 +69,10 @@ public class chonThucAnView extends JFrame{
 			tongSoLuong[i] = false;
 		}
 		
+		luuSoLuong = new String[tongSoLuong.length][2];
+		hiensl = new JLabel[tongSoLuong.length];
+		
+		
 		decor();
 		doAn = new JPanel();
 		doAn.setLayout(new GridLayout(10,1));
@@ -93,7 +99,19 @@ public class chonThucAnView extends JFrame{
 		hoanthanh = new JButton("Xong");
 		hoanthanh.setBounds(625,480,70,40);
 		hoanthanh.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		
+		hoanthanh.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				for (int i = 0; i< luuSoLuong.length; i++) {
+					luuSoLuong[i][1] = hiensl[i].getText();
+				}
+				
+				
+				tadao.luu_thuc_an_order(luuSoLuong);
+			}
+		});
 		contentPane.add(hoanthanh);
 		
 		danhMuc = new JTabbedPane();
@@ -130,7 +148,7 @@ public class chonThucAnView extends JFrame{
 		ImageIcon nut = new ImageIcon();
 		
 		for (int i =0; i<food.length; i++) {
-			
+			luuSoLuong[i][0] = food[i].getMaTA();
 			switch (food[i].getTenMon()) {
 				
 			case "Bắp":{
@@ -146,7 +164,7 @@ public class chonThucAnView extends JFrame{
 			int dem = i;
 			
 			JPanel bao = new JPanel(), tangGiam, tg;
-			JLabel tenMon, giaThanh, hiensl;
+			JLabel tenMon, giaThanh;
 			bao.setLayout(null);
 			bao.setBackground(colo.mau_thuc_an(food[i].getTenMon()));
 			bao.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -159,9 +177,9 @@ public class chonThucAnView extends JFrame{
 			
 			
 			
-			hiensl = new JLabel("1");
-			hiensl.setFont(font.setTilt_Neon_Size(20));
-			hiensl.setHorizontalAlignment(SwingConstants.CENTER);
+			hiensl[i] = new JLabel("0");
+			hiensl[i].setFont(font.setTilt_Neon_Size(20));
+			hiensl[i].setHorizontalAlignment(SwingConstants.CENTER);
 			
 			JButton remove, tang, giam;
 			
@@ -173,17 +191,17 @@ public class chonThucAnView extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int t =  Integer.parseInt(hiensl.getText()) + 1;
-					hiensl.setText(t+"");
+					int t =  Integer.parseInt(hiensl[dem].getText()) + 1;
+					hiensl[dem].setText(t+"");
 				}
 			});
 			giam.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (Integer.parseInt(hiensl.getText()) > 1) {
-						int t =  Integer.parseInt(hiensl.getText()) -1;
-						hiensl.setText(t+"");
+					if (Integer.parseInt(hiensl[dem].getText()) > 1) {
+						int t =  Integer.parseInt(hiensl[dem].getText()) -1;
+						hiensl[dem].setText(t+"");
 					}
 				}
 			});
@@ -202,7 +220,7 @@ public class chonThucAnView extends JFrame{
 					bao.setVisible(false);
 					soluong.remove(bao);
 					tongSoLuong[dem] = false;
-					hiensl.setText("1");
+					hiensl[dem].setText("1");
 					
 				}
 			});
@@ -213,7 +231,7 @@ public class chonThucAnView extends JFrame{
 			tg.add(tang);
 			tg.add(giam);
 			
-			tangGiam.add(hiensl);
+			tangGiam.add(hiensl[i]);
 			tangGiam.add(tg);
 			
 			tenMon = new JLabel(food[i].getTenMon());
@@ -237,9 +255,10 @@ public class chonThucAnView extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (tongSoLuong[dem]) {
-						int t =  Integer.parseInt(hiensl.getText()) + 1;
-						hiensl.setText(t+"");
+						int t =  Integer.parseInt(hiensl[dem].getText()) + 1;
+						hiensl[dem].setText(t+"");
 					}else {
+						hiensl[dem].setText("1");
 						bao.setVisible(true);
 						soluong.add(bao);
 						soluong.setVisible(false);
@@ -256,6 +275,7 @@ public class chonThucAnView extends JFrame{
 		
 		for (int i =0; i<drink.length; i++) {
 			int flenght= food.length;
+			luuSoLuong[flenght + i][0] = drink[i].getMaTA();
 			switch (drink[i].getTenMon()) {
 			
 			case "Coca-cola":{
@@ -276,7 +296,7 @@ public class chonThucAnView extends JFrame{
 			int dem = i;
 			int tangGiamHeight = 30;
 			JPanel bao = new JPanel(), tangGiam, tg;
-			JLabel tenMon, giaThanh, hiensl;
+			JLabel tenMon, giaThanh;
 			bao.setLayout(null);
 			bao.setSize(0, 30);
 			bao.setBackground(colo.mau_thuc_an(drink[i].getTenMon()));
@@ -286,9 +306,9 @@ public class chonThucAnView extends JFrame{
 			tangGiam.setLayout(new GridLayout(1,3));
 			tangGiam.setBounds(250, (slHeight/tongSoLuong.length - tangGiamHeight)/2, 90, tangGiamHeight);
 			
-			hiensl = new JLabel("1");
-			hiensl.setFont(font.setTilt_Neon_Size(20));
-			hiensl.setHorizontalAlignment(SwingConstants.CENTER);
+			hiensl[flenght + i] = new JLabel("0");
+			hiensl[flenght + i].setFont(font.setTilt_Neon_Size(20));
+			hiensl[flenght + i].setHorizontalAlignment(SwingConstants.CENTER);
 			
 			JButton remove, tang, giam;
 			
@@ -300,17 +320,17 @@ public class chonThucAnView extends JFrame{
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					int t =  Integer.parseInt(hiensl.getText()) + 1;
-					hiensl.setText(t+"");
+					int t =  Integer.parseInt(hiensl[flenght + dem].getText()) + 1;
+					hiensl[flenght + dem].setText(t+"");
 				}
 			});
 			giam.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					if (Integer.parseInt(hiensl.getText()) > 1) {
-						int t =  Integer.parseInt(hiensl.getText()) -1;
-						hiensl.setText(t+"");
+					if (Integer.parseInt(hiensl[flenght + dem].getText()) > 1) {
+						int t =  Integer.parseInt(hiensl[flenght + dem].getText()) -1;
+						hiensl[flenght + dem].setText(t+"");
 					}
 				}
 			});
@@ -329,7 +349,7 @@ public class chonThucAnView extends JFrame{
 					bao.setVisible(false);
 					soluong.remove(bao);
 					tongSoLuong[flenght + dem] = false;
-					hiensl.setText("1");
+					hiensl[flenght + dem].setText("1");
 					
 				}
 			});
@@ -341,7 +361,7 @@ public class chonThucAnView extends JFrame{
 			tg.add(tang);
 			tg.add(giam);
 			
-			tangGiam.add(hiensl);
+			tangGiam.add(hiensl[flenght + i]);
 			tangGiam.add(tg);
 			
 			tenMon = new JLabel(drink[i].getTenMon());
@@ -365,9 +385,10 @@ public class chonThucAnView extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					if (tongSoLuong[flenght + dem]) {
-						int t =  Integer.parseInt(hiensl.getText()) + 1;
-						hiensl.setText(t+"");
+						int t =  Integer.parseInt(hiensl[flenght + dem].getText()) + 1;
+						hiensl[flenght + dem].setText(t+"");
 					}else {
+						hiensl[flenght + dem].setText("1");
 						bao.setVisible(true);
 						soluong.add(bao);
 						soluong.setVisible(false);
