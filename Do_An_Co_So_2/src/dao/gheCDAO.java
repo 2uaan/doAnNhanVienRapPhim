@@ -161,5 +161,55 @@ public class gheCDAO{
 		
 	}
 	
-	
+	public void update_trang_thai_ghe() {
+		String gheht[][];
+		int soGhe = 0, maXC=0;
+		String tenGhe, loai;
+		try {
+			c = jdbc_new.getConnection();
+			String sql = "SELECT * FROM ghedangduocchon";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
+				
+			while (result.next()) {
+				String temp = result.getString("tenGhe");
+				soGhe++;
+			}
+				
+			gheht = new String[soGhe][3];
+			result = pst.executeQuery();
+			soGhe = 0;
+			while (result.next()) {
+				maXC = result.getInt("maXC");
+				tenGhe = result.getString("tenGhe");
+				loai = result.getString("loaiGhe");
+					
+				gheht[soGhe][0] = maXC+"";
+				gheht[soGhe][1] = tenGhe;
+				gheht[soGhe][2] = loai;
+				soGhe++;
+			}
+				
+			jdbc_new.closeConnection(c);
+			sql = "";
+			c = jdbc_new.getConnection();
+			
+			for (int i = 0; i< gheht.length; i++) {
+				if (gheht[i][2].equals("C")) {
+					sql = "UPDATE ghecouple\nSET";
+					sql += "\ntrangThai = 1"
+							+ "\nWHERE maXC = " + maXC + " and " + "tenGhe = '" + gheht[i][1]+"';";
+					PreparedStatement st = c.prepareStatement(sql);
+					int kq = st.executeUpdate(sql);
+				}
+			}
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+				// TODO: handle exception
+		}
+		
+		
+	}
 }

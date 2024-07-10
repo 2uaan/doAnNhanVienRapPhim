@@ -76,6 +76,8 @@ public class hoantatThongTinVe extends JFrame {
 		next.setBounds(115, 100, 50, 30);
 		contentPane.add(next);
 		
+		
+		
 		JLabel Background = new JLabel("");
 		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));
 		Background.setBounds(0, 0, infor.ngangKhung, infor.docKhung);
