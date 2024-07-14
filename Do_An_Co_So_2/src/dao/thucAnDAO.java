@@ -99,6 +99,25 @@ public class thucAnDAO{
 		return nuoc;
 	}
 	
+	public thucAn[] duyet_tat_ca_thuc_an() {
+		thucAn[] ta= new thucAn[duyet_so_luong_thuc_an()];
+		thucAn[] fo = duyet_do_an();
+		thucAn[] dr = duyet_nuoc_uong();
+		int dem = 0;
+		
+		for (thucAn phtu : fo) {
+		    ta[dem] = phtu;
+		    dem++;
+		}
+		for (thucAn phtu : dr) {
+			ta[dem] = phtu;
+		    dem++;
+		}
+		
+		
+		return ta;
+	}
+	
 	public String cat_ky_tu_cuoi(String str) {
 		String strr = "";
 		
@@ -129,5 +148,67 @@ public class thucAnDAO{
 			// TODO: handle exception
 		}
 		
+	}
+	
+	public int[] duyet_so_luong_tung_loai() {
+		int sl[] = new int[duyet_so_luong_thuc_an()];
+		String[] maTA = new String[duyet_so_luong_thuc_an()];
+		
+		try {
+			
+			c= jdbc_new.getConnection();
+			String sql = "SELECT * FROM  thucan";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
+			int i =0;
+			while(result.next()) {
+				String temp = result.getString("maTA");
+				maTA[i] = temp;
+				i++;
+			}
+			
+			sql = "SELECT * FROM hientai";
+			pst = c.prepareStatement(sql);
+			result = pst.executeQuery();
+			
+			while(result.next()) {
+				for (i=0; i<maTA.length; i++) {
+					int so = result.getInt(maTA[i]);
+					sl[i] = so;
+				}
+			}
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		  
+		return sl;
+	}
+	
+	public int duyet_so_luong_thuc_an() {
+		int soluong=0;
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			String sql = "SELECT * FROM  thucan";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
+			
+			while(result.next()) {
+				String temp = result.getString("tenMon");
+				soluong++;
+			}
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		return soluong;
 	}
 }

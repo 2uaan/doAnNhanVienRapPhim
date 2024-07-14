@@ -230,4 +230,82 @@ public class xuatChieuDAO{
 		
 	}
 	
+	public int duyet_so_ghe_dang_chon() {
+		int soluong = 0;
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			String sql = "SELECT *FROM ghedangduocchon";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
+			
+			while(result.next()) {
+				String temp = result.getString("tenGhe");
+				soluong++;
+			}
+			
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return soluong;
+	}
+	
+	public String doi_sang_gia_tien(int giaThanh) {
+		
+		String temp = "";
+		
+		while(giaThanh > 1000) {
+			String t = giaThanh +"";
+			temp = "."+t.substring(t.length()-3, t.length()) + temp;
+			giaThanh /= 1000;
+		}
+		
+		temp = giaThanh + temp;
+		
+		temp += "đ";
+
+		
+		return temp;
+	}
+	
+	public String[][] duyet_ghe_dang_chon(){
+		String ghe[][] = new String[duyet_so_ghe_dang_chon()][3];
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			String sql = "SELECT * FROM ghedangduocchon";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
+			
+			int dem  =0;
+			while(result.next()) {
+				String ten = result.getString("tenGhe");
+				String loai = result.getString("loaiGhe");
+				int giaBan = 0;
+				String sql2 = "SELECT * FROM loaighe";
+				PreparedStatement pst2 =c.prepareStatement(sql2);
+				ResultSet result2 = pst2.executeQuery();
+				
+				while(result2.next()) {
+					if (loai.equals(result2.getString("loai"))) giaBan = result2.getInt("giaBan"); 
+				}
+				
+				ghe[dem][0] = ten;
+				ghe[dem][1] = loai;
+				ghe[dem][2] = doi_sang_gia_tien(giaBan);
+				dem++;
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return ghe;
+	}
+	
 }

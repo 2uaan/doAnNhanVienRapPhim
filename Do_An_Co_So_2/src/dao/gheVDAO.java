@@ -216,4 +216,21 @@ public class gheVDAO{
 		
 	}
 	
+	public void tra_ve_ghe_trong() {
+			
+		try {
+			
+			c = jdbc_new.getConnection();
+			String sql = "UPDATE ghevip\r\n"
+					+ "SET\r\n"
+					+ "trangThai = 0";
+			PreparedStatement pst = c.prepareStatement(sql);
+			int kq = pst.executeUpdate();
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 }

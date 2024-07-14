@@ -5,12 +5,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import dao.gheNSDAO;
+import dao.thucAnDAO;
+import dao.xuatChieuDAO;
 import database.jdbc_new;
 import model.nhanVien;
+import model.thucAn;
 
 public class testt {
 	
 	public static void main(String[] args) {
+	
+	
+//		thucAnDAO tadao = new thucAnDAO();
+//		int so[] = tadao.duyet_so_luong_tung_loai();
+//		thucAn ta[] = tadao.duyet_tat_ca_thuc_an(); 
+//		
+//		for (int i = 0; i< so.length; i++) {
+//			System.out.print(ta[i].getTenMon()+" : ");
+//			System.out.println(so[i]);
+//		}
+		
+//		int giaThanh = 1600700500;
+//		String temp = "";
+//		
+//		while(giaThanh > 1000) {
+//			String t = giaThanh +"";
+//
+//			temp = "."+t.substring(t.length()-3, t.length()) + temp;
+//			giaThanh /= 1000;
+//		}
+//		
+//		temp = giaThanh + temp;
+//		
+//		temp += "đ";
+//		
+//		System.out.println(temp);
+		
 		
 //		nhanVien nVien[] = null;
 //		int sonv = 1;
@@ -48,32 +79,32 @@ public class testt {
 	
 	
 	
-		
-		try {
-			Connection c = jdbc_new.getConnection();
-			Statement st = c.createStatement();
-			String sql = "INSERT INTO ghens(hang, cot, tenGhe, maXC, trangThai)\nVALUES";
-			
-			for (int i =0; i<2; i++) {
-				char ch = (i==0) ? 'A':'B';
-				for (int j=0; j<8; j++) {
-					if (j == 7 && i==1) sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 1 + ");";
-					else sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 1 + "),";
-					
-				}
-			}
-			
-			
-			
-			int kq = st.executeUpdate(sql);
-			
-			jdbc_new.closeConnection(c);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		
+//		try {
+//			Connection c = jdbc_new.getConnection();
+//			Statement st = c.createStatement();
+//			String sql = "INSERT INTO ghens(hang, cot, tenGhe, maXC, trangThai)\nVALUES";
+//			
+//			for (int i =0; i<2; i++) {
+//				char ch = (i==0) ? 'A':'B';
+//				for (int j=0; j<8; j++) {
+//					if (j == 7 && i==1) sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 1 + ");";
+//					else sql += "\n('" + ch + "', " + (int)(j+1) + ", '" + ch+(int)(j+1) + "', " + 798 + ", " + 1 + "),";
+//					
+//				}
+//			}
+//			
+//			
+//			
+//			int kq = st.executeUpdate(sql);
+//			
+//			jdbc_new.closeConnection(c);
+//			
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		
 		
 		

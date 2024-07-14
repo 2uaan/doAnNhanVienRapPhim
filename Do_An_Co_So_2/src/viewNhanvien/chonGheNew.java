@@ -28,7 +28,7 @@ import viewXacNhan.xacnhanGhe;
 
 public class chonGheNew extends JFrame{
 	
-	private String[][] giaBan = {{"NS","75.000đ"},{"V","90.000đ"},{"C","200.000đ"}};
+	
 	private String[] kyHieu = {"Gần Màn Hình", "Vip", "Couple", "Đã Bán"};
 	private color colo = new color();
 	private font font;
@@ -48,7 +48,7 @@ public class chonGheNew extends JFrame{
 	boolean colorIsV[] = new boolean[v.length];
 	boolean colorIsC[] = new boolean[c.length];
 	private int toaDoNgang, toaDoDoc;
-	
+	private String[][] giaBan = nsdao.tra_ve_loai_ghe();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

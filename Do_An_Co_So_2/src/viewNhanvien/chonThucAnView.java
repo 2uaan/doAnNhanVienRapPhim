@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import dao.thucAnDAO;
 import model.*;
+import viewXacNhan.hoantatThongTinVe;
 
 public class chonThucAnView extends JFrame{
 	
@@ -94,7 +95,7 @@ public class chonThucAnView extends JFrame{
 		sluongScrooll.setBounds(460, 40, 400, slHeight);
 		contentPane.add(sluongScrooll);
 		
-		
+		hoantatThongTinVe hoantat = new hoantatThongTinVe();
 		
 		hoanthanh = new JButton("Xong");
 		hoanthanh.setBounds(625,480,70,40);
@@ -110,6 +111,8 @@ public class chonThucAnView extends JFrame{
 				
 				
 				tadao.luu_thuc_an_order(luuSoLuong);
+				setVisible(false);
+				hoantat.setVisible(true);
 			}
 		});
 		contentPane.add(hoanthanh);
@@ -133,13 +136,15 @@ public class chonThucAnView extends JFrame{
 		String temp = "";
 		
 		while(giaThanh > 1000) {
+			String t = giaThanh +"";
+			temp = "."+t.substring(t.length()-3, t.length()) + temp;
 			giaThanh /= 1000;
-			temp+= ".000";
 		}
 		
 		temp = giaThanh + temp;
 		
 		temp += "đ";
+
 		
 		return temp;
 	}

@@ -28,6 +28,12 @@ public class font {
 		return tilt_neon;
 	}
 	
+	public Font setTilt_Neon_UnBold_Size(int size) {
+		Font tilt_neon = new Font("Tilt Neon", Font.PLAIN, size);
+		
+		return tilt_neon;
+	}
+	
 	public Font setUTMWindsorBT(int size) {
 		Font font = new Font("UTM Windsor BT", Font.PLAIN, size);
 		

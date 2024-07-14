@@ -215,4 +215,71 @@ public class gheNSDAO{
 		
 	}
 	
+	public void tra_ve_ghe_trong() {
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			String sql = "UPDATE ghens\r\n"
+					+ "SET\r\n"
+					+ "trangThai = 0";
+			PreparedStatement pst = c.prepareStatement(sql);
+			int kq = pst.executeUpdate();
+			jdbc_new.closeConnection(c);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+	public String doi_sang_gia_tien(int giaThanh) {
+		
+		String temp = "";
+		
+		while(giaThanh > 1000) {
+			String t = giaThanh +"";
+			temp = "."+t.substring(t.length()-3, t.length()) + temp;
+			giaThanh /= 1000;
+		}
+		
+		temp = giaThanh + temp;
+		
+		temp += "đ";
+
+		
+		return temp;
+	}
+	
+	public String[][] tra_ve_loai_ghe(){
+		String giaGhe[][] = null;
+		
+		try {
+			
+			c = jdbc_new.getConnection();
+			String sql = "SELECT * FROM loaighe";
+			PreparedStatement pst = c.prepareStatement(sql);
+			ResultSet result = pst.executeQuery();
+			
+			int dem=0;
+			while(result.next()) {
+				String temp = result.getString("loai");
+				dem++;
+			}
+			giaGhe = new String[dem][2];
+			
+			result = pst.executeQuery();
+			dem=0;
+			while(result.next()) {
+				giaGhe[dem][0] = result.getString("loai");
+				giaGhe[dem][1] = doi_sang_gia_tien(result.getInt("giaBan"));
+				dem++;
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return giaGhe;
+	}
 }
