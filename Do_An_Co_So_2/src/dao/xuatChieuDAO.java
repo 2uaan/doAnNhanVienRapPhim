@@ -297,7 +297,7 @@ public class xuatChieuDAO{
 				
 				ghe[dem][0] = ten;
 				ghe[dem][1] = loai;
-				ghe[dem][2] = doi_sang_gia_tien(giaBan);
+				ghe[dem][2] = giaBan+"";
 				dem++;
 			}
 			

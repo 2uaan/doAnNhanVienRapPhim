@@ -112,6 +112,10 @@ public class color {
 				color = Color.DARK_GRAY;
 				break;
 			}	
+			case "Đang Chọn":{
+				color = Color.RED;
+				break;
+			}
 		}
 		return color;
 	}

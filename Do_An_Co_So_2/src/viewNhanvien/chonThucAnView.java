@@ -11,6 +11,8 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -254,6 +256,38 @@ public class chonThucAnView extends JFrame{
 			temp.setFont(font.setUTMWindsorBT(30));
 			temp.setBackground(colo.mau_thuc_an(food[i].getTenMon()));
 			temp.setBorder(BorderFactory.createRaisedBevelBorder());
+			temp.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					temp.setBorder(BorderFactory.createRaisedBevelBorder());
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					temp.setBorder(BorderFactory.createEtchedBorder());
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			temp.addActionListener(new ActionListener() {
 				
@@ -385,6 +419,38 @@ public class chonThucAnView extends JFrame{
 			temp.setBackground(colo.mau_thuc_an(drink[i].getTenMon()));
 			temp.setBorder(BorderFactory.createRaisedBevelBorder());
 			temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			temp.addMouseListener(new MouseListener() {
+							
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					temp.setBorder(BorderFactory.createRaisedBevelBorder());
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					temp.setBorder(BorderFactory.createEtchedBorder());
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			temp.addActionListener(new ActionListener() {
 				
 				@Override

@@ -1,6 +1,7 @@
 package viewNhanvien;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -10,7 +11,10 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,7 +33,7 @@ import viewXacNhan.xacnhanGhe;
 public class chonGheNew extends JFrame{
 	
 	
-	private String[] kyHieu = {"Gần Màn Hình", "Vip", "Couple", "Đã Bán"};
+	private String[] kyHieu = {"Gần Màn Hình", "Vip", "Couple", "Đã Bán", "Đang Chọn"};
 	private color colo = new color();
 	private font font;
 	private JPanel contentPane, screen, ghens, ghev, ghec;
@@ -173,6 +177,51 @@ public class chonGheNew extends JFrame{
 				temp.setBackground((state) ? colo.ghens : Color.DARK_GRAY);
 				temp.setBounds(toaDoNgang, toaDoDoc, 50, 50);
 				temp.setEnabled(state);
+				temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				temp.setBorder(BorderFactory.createEtchedBorder());
+				if (state) {
+					temp.addMouseListener(new MouseListener() {
+						
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mousePressed(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							temp.setBorder(BorderFactory.createEtchedBorder());
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							temp.setBorder(BorderFactory.createRaisedBevelBorder());
+							
+						}
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							// TODO Auto-generated method stub
+							temp.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+							
+						}
+					});
+				}
 				temp.addActionListener(new ActionListener() {
 					
 					@Override
@@ -210,7 +259,51 @@ public class chonGheNew extends JFrame{
 				JButton temp = new JButton(v[vitri].getTenGhe());
 				temp.setEnabled(state);
 				temp.setBackground((state) ? colo.ghev : Color.DARK_GRAY);
+				temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				temp.setBounds(toaDoNgang, toaDoDoc, 50, 50);
+				temp.setBorder(BorderFactory.createEtchedBorder());
+				if (state) {
+					temp.addMouseListener(new MouseListener() {
+						
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mousePressed(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							temp.setBorder(BorderFactory.createEtchedBorder());
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							temp.setBorder(BorderFactory.createRaisedBevelBorder());
+							
+						}
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							// TODO Auto-generated method stub
+							temp.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+						}
+					});
+				}
 				temp.addActionListener(new ActionListener() {
 					
 					@Override
@@ -247,7 +340,51 @@ public class chonGheNew extends JFrame{
 				JButton temp = new JButton(c[vitri].getTenGhe());
 				temp.setEnabled(state);
 				temp.setBackground((state) ? colo.ghec : Color.DARK_GRAY);
+				temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				temp.setBounds(toaDoNgang, toaDoDoc, 100, 50);
+				temp.setBorder(BorderFactory.createEtchedBorder());
+				if (state) {
+					temp.addMouseListener(new MouseListener() {
+						
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mousePressed(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							temp.setBorder(BorderFactory.createEtchedBorder());
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							temp.setBorder(BorderFactory.createRaisedBevelBorder());
+							
+						}
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							// TODO Auto-generated method stub
+							temp.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							
+							temp.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+						}
+					});
+				}
 				temp.addActionListener(new ActionListener() {
 					
 					@Override
@@ -273,13 +410,13 @@ public class chonGheNew extends JFrame{
 	}
 	
 	public void tao_ky_hieu() {
-		int doc =50;
+		int doc =20;
 		for (int i =0; i< kyHieu.length; i++) {
 			JPanel bao = new JPanel();
 			bao.setLayout(new FlowLayout());
-			bao.setBounds(doc, 520, (i==0) ? 150: 100, 30);
+			bao.setBounds(doc, 520, (i==0 || i==kyHieu.length-1) ? 150: 100, 30);
 			bao.setBackground(colo.trongSuot);;
-			doc+= (i==0) ? 150: 110;
+			doc+= (i==0 || i==kyHieu.length-1) ? 150: 100;
 			
 			JButton kyhieu = new JButton();
 			kyhieu.setBackground(colo.mau_ky_hieu(kyHieu[i]));

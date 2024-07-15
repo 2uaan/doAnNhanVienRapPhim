@@ -3,12 +3,12 @@ package viewXacNhan;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,8 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.border.EmptyBorder;
 
 import dao.gheCDAO;
@@ -40,6 +38,7 @@ public class xuatThongTinVe extends JFrame{
 	private xuatChieuDAO xcdao = new xuatChieuDAO();
 	private JLabel bill, food, seet;
 	private font font = new font();
+	private JLabel mov = new JLabel(), hap = new JLabel();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -108,9 +107,61 @@ public class xuatThongTinVe extends JFrame{
 		chia.setBorder(BorderFactory.createLoweredBevelBorder());
 		contentPane.add(chia);
 		
+		mov = new JLabel(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\mov.png"));
+		hap = new JLabel(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\happy.png"));
+		mov.setBounds(320, 470, 60, 60);
+		hap.setBounds(520, 470, 60, 60);
+		mov.setVisible(false);
+		hap.setVisible(false);
 		
-		JButton done = new JButton("Xong");
-		done.setBounds(this.getWidth()/2-40, 500, 80, 30);
+		contentPane.add(hap);
+		contentPane.add(mov);
+		
+		JButton done = new JButton("Thanh Toán");
+		done.setBounds(this.getWidth()/2-55, 500, 110, 30);
+		done.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				mov.setVisible(false);
+				hap.setVisible(false);
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				mov.setVisible(true);
+				hap.setVisible(true);
+				
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		done.addActionListener(new ActionListener() {
 			
 			@Override
@@ -124,8 +175,17 @@ public class xuatThongTinVe extends JFrame{
 			}
 		});
 		contentPane.add(done);
-		tao_thong_tin_food(tadao.duyet_tat_ca_thuc_an(), tadao.duyet_so_luong_tung_loai());
-		tao_thong_tin_ghe();
+		int tienTA = tao_thong_tin_food(tadao.duyet_tat_ca_thuc_an(), tadao.duyet_so_luong_tung_loai());
+		int tienGhe =  tao_thong_tin_ghe();
+		JLabel tongtien = new JLabel("(" + doi_sang_gia_tien(tienGhe + tienTA) + ")");
+		tongtien.setFont(font.setTilt_Neon_Size(35));
+		tongtien.setForeground(colo.nauVang);
+		tongtien.setBounds(this.getWidth()/2+100, 10, 280, 40);
+		contentPane.add(tongtien);
+		
+		
+		
+		
 		
 		trang_tri_cham(35,40);
 		trang_tri_cham(485,40);
@@ -171,7 +231,7 @@ public class xuatThongTinVe extends JFrame{
 		
 		
 	}
-	private void tao_thong_tin_food(thucAn[] ta, int[] soluong) {
+	private int tao_thong_tin_food(thucAn[] ta, int[] soluong) {
 		String cot[] = {" Tên"," Số Lượng"," Giá Thành"};
 		JPanel dau, giua, cuoi;
 		int tongtien=0;
@@ -240,22 +300,27 @@ public class xuatThongTinVe extends JFrame{
 		foodPane.add(cuoi, BorderLayout.PAGE_END);
 		foodPane.setVisible(false);
 		foodPane.setVisible(true);
+		
+		return tongtien;
 	}
-	private void tao_thong_tin_ghe() {
+	private int tao_thong_tin_ghe() {
 		
 		String[][] dsGhe = xcdao.duyet_ghe_dang_chon();
 		String cot[] = {" Tên Ghế"," Loại"," Giá Thành"};
 		JPanel dau, giua, cuoi;
-		
+		int tongtien = 0;
 		
 		dau = new JPanel();
 		giua = new JPanel();
 		cuoi = new JPanel();
 		
-		GridLayout gr = new GridLayout(0, 1);
+		GridLayout gr = new GridLayout();
+		gr.setRows(10);
+		gr.setColumns(1);
 		
 		dau.setLayout(new GridLayout(1,3));
 		giua.setLayout(gr);
+		giua.setBorder(BorderFactory.createLineBorder(Color.black));
 		cuoi.setLayout(new GridLayout(1,2));
 		
 		
@@ -267,33 +332,43 @@ public class xuatThongTinVe extends JFrame{
 			dau.add(temp);
 		}
 		
-		for (int i = 0; i< 20; i++) {
-			GridLayout temp = new GridLayout(1,3);
-			JPanel t = new JPanel();
-			t.setLayout(temp);
+		for (int i = 0; i< dsGhe.length; i++) {
+
+			JPanel gom = new JPanel();
+			gom.setLayout(new GridLayout(1,3));
 			
-			t.add(new JButton("thu"));
-			t.add(new JButton("thu"));
-			t.add(new JButton("thu"));
+			JLabel ten, loai, gia;
+			ten = new JLabel(" "+dsGhe[i][0]);
+			loai = new JLabel(" "+dsGhe[i][1]);
+			gia = new JLabel(" "+doi_sang_gia_tien(Integer.parseInt(dsGhe[i][2])));
+			tongtien+= Integer.parseInt(dsGhe[i][2]);
 			
-			giua.add(t);
+			gom.add(ten);
+			gom.add(loai);
+			gom.add(gia);
+			
+			giua.add(gom);
 			
 		}
 		
 		JLabel tongLabel = new JLabel(" Tổng Ghế:");
 		tongLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 		tongLabel.setFont(font.setUTMfacebookKnT(20));
+		JLabel tong = new JLabel(" "+doi_sang_gia_tien(tongtien));
+		tong.setBorder(BorderFactory.createLineBorder(Color.black));
+		tong.setFont(font.setUTMfacebookKnT(20));
+		tong.setForeground(colo.nauVang);
 		
 		cuoi.add(tongLabel);
+		cuoi.add(tong);
 		
-		JScrollPane cen = new JScrollPane(giua);
-		cen.setLayout(new ScrollPaneLayout());
-//		cen.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		seetPane.add(dau, BorderLayout.PAGE_START);
-		seetPane.add(cen, BorderLayout.CENTER);
+		seetPane.add(giua, BorderLayout.CENTER);
 		seetPane.add(cuoi, BorderLayout.PAGE_END);
 		seetPane.setVisible(false);
 		seetPane.setVisible(true);
+		
+		return tongtien;
 	}
 	
 }

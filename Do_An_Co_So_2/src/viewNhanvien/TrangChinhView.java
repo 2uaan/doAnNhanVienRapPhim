@@ -1,8 +1,10 @@
 package viewNhanvien;
 
 import java.awt.AlphaComposite;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,15 +12,21 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 import dao.nhanVienDAO;
-import model.inforRapPhim;
+import model.*;
 import viewKhachhang.menuDoAn;
 import viewKhachhang.menuNuocUong;
 
@@ -39,6 +47,8 @@ public class TrangChinhView extends JFrame{
 	private inforRapPhim infor = new inforRapPhim();
 	private chonXuatChieuVie xuatchieu;
 	private chonThucAnView thucan;
+	private font font = new font();
+	private color colo = new color();
 	
 	/**
 	 * Launch the application.
@@ -138,12 +148,52 @@ public class TrangChinhView extends JFrame{
 		contentPane.setLayout(null);
 		
 
+		loginNVview lgin = new loginNVview();
 		khung2nut.add(veThucAn);
 		khung2nut.add(vePhim);
 		getContentPane().add(khung2nut);
 		
-		
-		
+		JButton logOut = new JButton("<-- Đăng xuất");
+		logOut.setBackground(new Color(0,0,0,0));
+		logOut.setBounds(0, 530, 150, 30);
+		logOut.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		logOut.setBorderPainted(false);
+		logOut.setContentAreaFilled(false);
+		logOut.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				logOut.setForeground(Color.black);
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				logOut.setForeground(colo.nauVang);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		logOut.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setVisible(false);
+				lgin.setVisible(true);
+			}
+		});
+		logOut.setFont(font.setTilt_Neon_Size(15));
+		contentPane.add(logOut);
 		
 		JLabel Background = new JLabel("");
 		Background.setIcon(new ImageIcon("C:\\Users\\tlmqu\\git\\repository\\Do_An_Co_So_2\\image\\ChairBackground.png"));

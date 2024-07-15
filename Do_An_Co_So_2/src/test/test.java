@@ -12,4 +12,4 @@ public class test {
 		lg.setVisible(true);
 		
 	}
-}
+} 
